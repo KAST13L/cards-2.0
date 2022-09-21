@@ -1,24 +1,25 @@
 import React, {useState} from 'react';
 import s from './Registration.module.scss';
 import {useFormik} from "formik";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Button, FormControl, FormGroup, FormLabel, Grid, Paper} from "@material-ui/core";
-import {registrationTC} from "../../app/redux/app-reducer";
+import {registrationTC} from "../../app/redux/auth-reducer";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../Header/Pages";
 import {RegistrationParamsType} from "../../api/auth-api";
+import {AppRootStateType} from "../../app/redux/store";
 
 
 export const Registration = () => {
 
     const dispatch = useDispatch()
-
+    const isRegister = useSelector<AppRootStateType, boolean>(state => state.auth.isRegister)
     const [isVisible, setIsVisible] = useState<boolean>(false)
 
     const handleClickShowPassword = () => {
@@ -56,7 +57,7 @@ export const Registration = () => {
 
             if (!values.confirmPassword) {
                 errors.confirmPassword = 'Required'
-            } else if (values.confirmPassword.length < 7) {
+            } else if (values.confirmPassword.length < 8) {
                 errors.confirmPassword = 'Invalid password'
             } else if (values.password !== values.confirmPassword) {
                 errors.confirmPassword = 'passwords must be equal'
@@ -75,8 +76,10 @@ export const Registration = () => {
     const confirmPasswordError = formik.touched.confirmPassword && formik.errors.confirmPassword ?
         <div>{formik.errors.confirmPassword}</div> : null
 
+    if (isRegister) return <Navigate to={PATH.LOGIN}/>
+
     return <Grid container className={s.registration} justifyContent={'center'}>
-        <Paper elevation={5} style={{padding: '20px 50px'}} >
+        <Paper elevation={5} style={{padding: '20px 50px'}}>
             <form onSubmit={formik.handleSubmit}>
                 <FormControl className={s.form}>
                     <h1 className={s.formLabel}>
