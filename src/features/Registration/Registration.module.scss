@@ -1,12 +1,14 @@
 .registration{
     .form{
       width: 400px;
-      .textField{
-      }
       .error{
         color: red;
         height: 20px;
         padding: 7px 5px 5px 15px;
+      }
+      .formLabel{
+        padding-top: 15px;
+        text-align: center
       }
     }
 }

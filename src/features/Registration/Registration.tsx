@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import s from './Registration.module.scss';
 import {useFormik} from "formik";
 import {useDispatch} from "react-redux";
-import {Button, FormControl, FormGroup, FormLabel, Grid} from "@material-ui/core";
+import {Button, FormControl, FormGroup, FormLabel, Grid, Paper} from "@material-ui/core";
 import {registrationTC} from "../../app/redux/app-reducer";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -75,11 +75,11 @@ export const Registration = () => {
     const confirmPasswordError = formik.touched.confirmPassword && formik.errors.confirmPassword ?
         <div>{formik.errors.confirmPassword}</div> : null
 
-    return <div className={s.registration}>
-        <Grid container justifyContent={'center'}>
+    return <Grid container className={s.registration} justifyContent={'center'}>
+        <Paper elevation={5} style={{padding: '20px 50px'}} >
             <form onSubmit={formik.handleSubmit}>
                 <FormControl className={s.form}>
-                    <h1 style={{textAlign: 'center'}}>
+                    <h1 className={s.formLabel}>
                         SIGN UP
                     </h1>
                     <FormGroup>
@@ -135,12 +135,12 @@ export const Registration = () => {
                             type={'submit'} variant={'contained'} color={'primary'}>
                             Sign up
                         </Button>
-                        <FormLabel style={{marginTop: '15px'}}>
-                            maybe you want <NavLink to={PATH.LOGIN}>SIGN IN</NavLink>?
+                        <FormLabel className={s.formLabel}>
+                            <div>Already have an account? <NavLink to={PATH.LOGIN}>SIGN IN</NavLink></div>
                         </FormLabel>
                     </FormGroup>
                 </FormControl>
             </form>
-        </Grid>
-    </div>
+        </Paper>
+    </Grid>
 }
