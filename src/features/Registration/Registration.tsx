@@ -18,6 +18,15 @@ import {RegisterParamsType} from "../../api/api";
 
 export const Registration = () => {
 
+    return <Grid container className={s.registration} justifyContent={'center'}>
+        <Paper elevation={5} style={{padding: '20px 50px'}}>
+            <RegisterForm/>
+        </Paper>
+    </Grid>
+}
+
+const RegisterForm = () => {
+
     const dispatch = useDispatch()
     const isRegister = useSelector<AppRootStateType, boolean>(state => state.auth.isRegister)
     const [isVisible, setIsVisible] = useState<boolean>(false)
@@ -80,72 +89,68 @@ export const Registration = () => {
 
     if (isRegister) return <Navigate to={PATH.LOGIN}/>
 
-    return <Grid container className={s.registration} justifyContent={'center'}>
-        <Paper elevation={5} style={{padding: '20px 50px'}}>
-            <form onSubmit={formik.handleSubmit}>
-                <FormControl className={s.form}>
-                    <h1 className={s.formLabel}>
-                        SIGN UP
-                    </h1>
-                    <FormGroup>
-                        <FormControl>
-                            <InputLabel>Email</InputLabel>
-                            <OutlinedInput
-                                error={!!emailError}
-                                {...formik.getFieldProps('email')}
-                            />
-                            <div className={s.error}>{emailError}</div>
-                        </FormControl>
-                        <FormControl>
-                            <InputLabel>Password</InputLabel>
-                            <OutlinedInput
-                                type={isVisible ? 'text' : 'password'}
-                                error={!!passwordError}
-                                {...formik.getFieldProps('password')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                        >
-                                            {isVisible ? <VisibilityOff/> : <Visibility/>}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                            />
-                            <div className={s.error}>{passwordError}</div>
-                        </FormControl>
-                        <FormControl>
-                            <InputLabel>Confirm password</InputLabel>
-                            <OutlinedInput
-                                type={isVisible ? 'text' : 'password'}
-                                error={!!confirmPasswordError}
-                                {...formik.getFieldProps('confirmPassword')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                        >
-                                            {isVisible ? <VisibilityOff/> : <Visibility/>}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                            />
-                            <div className={s.error}>{confirmPasswordError}</div>
-                        </FormControl>
-                        <Button
-                            type={'submit'} variant={'contained'} color={'primary'}>
-                            Sign up
-                        </Button>
-                        <FormLabel className={s.formLabel}>
-                            <div>Already have an account? <NavLink to={PATH.LOGIN}>SIGN IN</NavLink></div>
-                        </FormLabel>
-                    </FormGroup>
+    return <form onSubmit={formik.handleSubmit}>
+        <FormControl className={s.form}>
+            <h1 className={s.formLabel}>
+                SIGN UP
+            </h1>
+            <FormGroup>
+                <FormControl>
+                    <InputLabel>Email</InputLabel>
+                    <OutlinedInput
+                        error={!!emailError}
+                        {...formik.getFieldProps('email')}
+                    />
+                    <div className={s.error}>{emailError}</div>
                 </FormControl>
-            </form>
-        </Paper>
-    </Grid>
+                <FormControl>
+                    <InputLabel>Password</InputLabel>
+                    <OutlinedInput
+                        type={isVisible ? 'text' : 'password'}
+                        error={!!passwordError}
+                        {...formik.getFieldProps('password')}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {isVisible ? <VisibilityOff/> : <Visibility/>}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                    <div className={s.error}>{passwordError}</div>
+                </FormControl>
+                <FormControl>
+                    <InputLabel>Confirm password</InputLabel>
+                    <OutlinedInput
+                        type={isVisible ? 'text' : 'password'}
+                        error={!!confirmPasswordError}
+                        {...formik.getFieldProps('confirmPassword')}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {isVisible ? <VisibilityOff/> : <Visibility/>}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                    <div className={s.error}>{confirmPasswordError}</div>
+                </FormControl>
+                <Button
+                    type={'submit'} variant={'contained'} color={'primary'}>
+                    Sign up
+                </Button>
+                <FormLabel className={s.formLabel}>
+                    <div>Already have an account? <NavLink to={PATH.LOGIN}>SIGN IN</NavLink></div>
+                </FormLabel>
+            </FormGroup>
+        </FormControl>
+    </form>
 }

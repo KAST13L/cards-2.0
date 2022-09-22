@@ -26,12 +26,13 @@ export const appReducer = (state = initialState, action: AppActionsType): Initia
     }
 }
 
+// action creators
 export const setAppErrorAC = (error: string | null) => ({type:'SET_APP_ERROR', error} as const )
 export const setAppStatusAC = (status: RequestStatusType) => ({type:'SET_APP_STATUS', status} as const )
 export const setAppInitializedAC = (isInitialized: boolean) => ({type:'SET_APP_INITIALIZED',isInitialized} as const )
 export const setAppSuccessAC = (success: string | null) => ({type:'SET_APP_SUCCESS',success} as const )
 
-
+//types
 export type AppActionsType =
     ReturnType<typeof setAppErrorAC> |
     ReturnType<typeof setAppStatusAC> |
