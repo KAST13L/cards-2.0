@@ -55,7 +55,7 @@ export const Login = () => {
         <div className={s.login}>
             {loadingStatus === 'loading' && <Loader/>}
             <Grid container justifyContent={'center'} style={{padding: '30px'}}>
-                <Grid item justifyContent={'center'}>
+                <Grid item>
                     <form onSubmit={formik.handleSubmit}>
                         <FormControl style={styleForm} variant={"filled"}>
                             <FormLabel>

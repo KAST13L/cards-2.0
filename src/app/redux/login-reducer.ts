@@ -1,6 +1,6 @@
 import {setAppErrorAC, setAppStatusAC} from './app-reducer';
-import {AuthApi, LoginResponseType} from '../../api/auth-api';
 import {ThunkType} from './store';
+import {authAPI, AuthResponseType} from '../../api/api';
 
 
 const initialState: LoginStateType = {
@@ -32,16 +32,16 @@ export const loginReducer = (state: LoginStateType = initialState, action: Login
 }
 
 // action
-export const getUserData = (data: LoginResponseType, isAuth: boolean) =>
+export const getUserData = (data: AuthResponseType, isAuth: boolean) =>
     ({type: 'LOGIN/GET-USER-DATA', data, isAuth} as const)
-export const updateUserDataInfo = (data: LoginResponseType) =>
+export const updateUserDataInfo = (data: AuthResponseType) =>
     ({type: 'LOGIN/UPDATE-USER-DATA-INFO', data} as const)
 
 // thunk
 export const loginTC = (email: string, password: string, rememberMe: boolean): ThunkType => async dispatch => {
     try {
         dispatch(setAppStatusAC('loading'))
-        const res = await AuthApi.login(email, password, rememberMe)
+        const res = await authAPI.login({email, password, rememberMe})
         dispatch(getUserData(res.data, true));
     } catch (e: any) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
@@ -56,9 +56,9 @@ export const updateUserInfo = (name: string, avatar: string): ThunkType => async
         let temp: string = avatar
         temp = ' '
         const data = {name, avatar: temp}
-        const res = await AuthApi.updateUserInfo(data)
+        const res = await authAPI.updateProfile(data)
         dispatch(updateUserDataInfo(res.data.updatedUser))
-    } catch (e:any) {
+    } catch (e: any) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
         dispatch(setAppErrorAC(error))
     } finally {
@@ -70,6 +70,6 @@ export const updateUserInfo = (name: string, avatar: string): ThunkType => async
 export type LoginActionType = ReturnType<typeof getUserData> | ReturnType<typeof updateUserDataInfo>
 
 type LoginStateType = {
-    data: LoginResponseType
+    data: AuthResponseType
     isAuth: boolean
 }
