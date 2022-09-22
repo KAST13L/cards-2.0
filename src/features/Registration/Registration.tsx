@@ -6,28 +6,19 @@ import {Button, FormControl, FormGroup, FormLabel, Grid, Paper} from "@material-
 import {registrationTC} from "../../app/redux/auth-reducer";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Visibility from "@mui/icons-material/Visibility";
 import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../Header/Pages";
 import {RegistrationParamsType} from "../../api/auth-api";
 import {AppRootStateType} from "../../app/redux/store";
-
+import {VisiblePassword} from "../../components/VisiblePassword/VisiblePassword";
 
 export const Registration = () => {
 
     const dispatch = useDispatch()
-    const isRegister = useSelector<AppRootStateType, boolean>(state => state.auth.isRegister)
     const [isVisible, setIsVisible] = useState<boolean>(false)
+    const visiblePassword = <VisiblePassword isVisible={isVisible} setIsVisible={setIsVisible}/>
 
-    const handleClickShowPassword = () => {
-        setIsVisible(!isVisible)
-    };
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
+    const isRegister = useSelector<AppRootStateType, boolean>(state => state.auth.isRegister)
 
     type FormikErrorType = {
         email?: string
@@ -76,7 +67,11 @@ export const Registration = () => {
     const confirmPasswordError = formik.touched.confirmPassword && formik.errors.confirmPassword ?
         <div>{formik.errors.confirmPassword}</div> : null
 
-    if (isRegister) return <Navigate to={PATH.LOGIN}/>
+    if (isRegister) {
+        return <Navigate to={PATH.LOGIN}/>
+    }
+
+
 
     return <Grid container className={s.registration} justifyContent={'center'}>
         <Paper elevation={5} style={{padding: '20px 50px'}}>
@@ -100,17 +95,7 @@ export const Registration = () => {
                                 type={isVisible ? 'text' : 'password'}
                                 error={!!passwordError}
                                 {...formik.getFieldProps('password')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                        >
-                                            {isVisible ? <VisibilityOff/> : <Visibility/>}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
+                                endAdornment={visiblePassword}
                             />
                             <div className={s.error}>{passwordError}</div>
                         </FormControl>
@@ -120,17 +105,7 @@ export const Registration = () => {
                                 type={isVisible ? 'text' : 'password'}
                                 error={!!confirmPasswordError}
                                 {...formik.getFieldProps('confirmPassword')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                        >
-                                            {isVisible ? <VisibilityOff/> : <Visibility/>}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
+                                endAdornment={visiblePassword}
                             />
                             <div className={s.error}>{confirmPasswordError}</div>
                         </FormControl>
