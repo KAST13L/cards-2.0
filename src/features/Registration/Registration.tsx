@@ -67,7 +67,9 @@ export const Registration = () => {
         onSubmit: values => {
             const registrationValues: RegisterParamsType = {email: values.email, password: values.password}
             dispatch(registrationTC(registrationValues))
-            formik.resetForm()
+            if (isRegister){
+                formik.resetForm()
+            }
         },
     })
 
