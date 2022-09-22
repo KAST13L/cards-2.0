@@ -6,14 +6,11 @@ import {Button, FormControl, FormGroup, FormLabel, Grid, Paper} from "@material-
 import {registrationTC} from "../../app/redux/auth-reducer";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Visibility from "@mui/icons-material/Visibility";
 import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../Header/Pages";
 import {AppRootStateType} from "../../app/redux/store";
 import {RegisterParamsType} from "../../api/api";
+import {VisibleIcon} from "../../components/VisibleIconFroPassword/VisibleIcon";
 
 
 export const Registration = () => {
@@ -31,12 +28,7 @@ const RegisterForm = () => {
     const isRegister = useSelector<AppRootStateType, boolean>(state => state.auth.isRegister)
     const [isVisible, setIsVisible] = useState<boolean>(false)
 
-    const handleClickShowPassword = () => {
-        setIsVisible(!isVisible)
-    };
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
+
 
     type FormikErrorType = {
         email?: string
@@ -109,17 +101,7 @@ const RegisterForm = () => {
                         type={isVisible ? 'text' : 'password'}
                         error={!!passwordError}
                         {...formik.getFieldProps('password')}
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                >
-                                    {isVisible ? <VisibilityOff/> : <Visibility/>}
-                                </IconButton>
-                            </InputAdornment>
-                        }
+                        endAdornment={<VisibleIcon isVisible={isVisible} setIsVisible={setIsVisible}/>}
                     />
                     <div className={s.error}>{passwordError}</div>
                 </FormControl>
@@ -129,17 +111,7 @@ const RegisterForm = () => {
                         type={isVisible ? 'text' : 'password'}
                         error={!!confirmPasswordError}
                         {...formik.getFieldProps('confirmPassword')}
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                >
-                                    {isVisible ? <VisibilityOff/> : <Visibility/>}
-                                </IconButton>
-                            </InputAdornment>
-                        }
+                        endAdornment={<VisibleIcon isVisible={isVisible} setIsVisible={setIsVisible}/>}
                     />
                     <div className={s.error}>{confirmPasswordError}</div>
                 </FormControl>
