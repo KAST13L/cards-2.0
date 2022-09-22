@@ -8,30 +8,25 @@ export const Header = () => {
     return (
         <div className={s.container}>
             <div className={s.links}>
-                <div className={s.link}>
-                    <NavLink className={({isActive}) => isActive ? s.active : ''}
-                             to={PATH.PROFILE}>
-                        Profile
-                    </NavLink></div>
-                <div className={s.link}><NavLink className={({isActive}) => isActive ? s.active : ''}
-                                                 to={PATH.LOGIN}>
-                    Login
-                </NavLink></div>
-                <div className={s.link}><NavLink className={({isActive}) => isActive ? s.active : ''}
-                                                 to={PATH.REGISTRATION}>
-                    Registration
-                </NavLink></div>
-                <div className={s.link}><NavLink className={({isActive}) => isActive ? s.active : ''}
-                                                 to={PATH.PASSWORD_RECOVERY}>
-                    Password recovery+
-                </NavLink></div>
-                <div className={s.link}><NavLink className={({isActive}) => isActive ? s.active : ''}
-                                                 to={PATH.ENTERING_A_NEW_PASSWORD}>
-                    Entering a new password
-                </NavLink></div>
+                <NavLinkItem path={PATH.PROFILE} title={'Profile'}/>
+                <NavLinkItem path={PATH.LOGIN} title={'Login'}/>
+                <NavLinkItem path={PATH.REGISTRATION} title={'Registration'}/>
+                <NavLinkItem path={PATH.PASSWORD_RECOVERY} title={'Password recovery+'}/>
+                <NavLinkItem path={PATH.NEW_PASSWORD} title={'New password'}/>
                 <div className={s.link}>Hover me!</div>
             </div>
         </div>
     )
 }
 
+
+const NavLinkItem = (props: NavLinkItemPropsType) => {
+    return <div className={s.link}>
+        <NavLink className={({isActive}) => isActive ? s.active : ''}
+                                            to={props.path}
+        >{props.title}</NavLink></div>
+}
+type NavLinkItemPropsType = {
+    path: string
+    title: string
+}

@@ -12,7 +12,7 @@ export const PATH = {
     LOGIN: '/login',
     PASSWORD_RECOVERY: '/passwordRecovery',
     REGISTRATION: '/registration',
-    ENTERING_A_NEW_PASSWORD: '/enteringANewPassword',
+    NEW_PASSWORD: '/enteringANewPassword',
     PROFILE: '/profile'
 }
 
@@ -26,7 +26,7 @@ export function Pages() {
                 <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery/>}/>
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
                 <Route path={PATH.REGISTRATION} element={<Registration/>}/>
-                <Route path={PATH.ENTERING_A_NEW_PASSWORD} element={<EnteringANewPassword/>}/>
+                <Route path={PATH.NEW_PASSWORD} element={<EnteringANewPassword/>}/>
 
                 <Route path={'/*'} element={<Welcome/>}/>
             </Routes>
