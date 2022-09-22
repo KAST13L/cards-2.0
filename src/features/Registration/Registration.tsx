@@ -3,7 +3,6 @@ import s from './Registration.module.scss';
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
 import {Button, FormControl, FormGroup, FormLabel, Grid, Paper} from "@material-ui/core";
-import {registrationTC} from "../../app/redux/auth-reducer";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import {Navigate, NavLink} from "react-router-dom";
@@ -11,6 +10,7 @@ import {PATH} from "../Header/Pages";
 import {AppRootStateType} from "../../app/redux/store";
 import {RegisterParamsType} from "../../api/api";
 import {VisibleIcon} from "../../components/VisibleIconFroPassword/VisibleIcon";
+import {registrationTC} from "../../app/redux/auth-reducer";
 
 
 export const Registration = () => {
@@ -27,8 +27,6 @@ const RegisterForm = () => {
     const dispatch = useDispatch()
     const isRegister = useSelector<AppRootStateType, boolean>(state => state.auth.isRegister)
     const [isVisible, setIsVisible] = useState<boolean>(false)
-
-
 
     type FormikErrorType = {
         email?: string

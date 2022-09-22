@@ -2,7 +2,7 @@ import {useAppDispatch, useAppSelector} from '../../app/redux/store';
 import * as Yup from 'yup';
 import {useState} from 'react';
 import {useFormik} from 'formik';
-import {loginTC} from '../../app/redux/login-reducer';
+import {loginTC} from '../../app/redux/auth-reducer';
 import {Link, Navigate} from 'react-router-dom';
 import {PATH} from '../Header/Pages';
 import {
@@ -22,7 +22,7 @@ import {VisibleIcon} from '../../components/VisibleIconFroPassword/VisibleIcon';
 
 export const Login = () => {
     const dispatch = useAppDispatch()
-    const isAuth = useAppSelector<boolean>(state => state.login.isAuth)
+    const isAuth = useAppSelector<boolean>(state => state.auth.isAuth)
     const loadingStatus = useAppSelector<string>(state => state.app.status)
     const [hidden, setHidden] = useState(true)
 
