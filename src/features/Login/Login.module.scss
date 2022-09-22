@@ -1,3 +1,42 @@
-.login{
-
+.login {
+  text-align: center;
+  margin-top: 20px;
+  .styleH1 {
+    line-height: 32px;
+    font-weight: 600;
+    font-size: 26px;
+    color: #000000;
+  }
+  .styleP {
+    color: #000000;
+    opacity: 0.5;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .signUp {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #366EFF;
+    text-decoration: none;
+    &:hover {
+      color: #0457bb;
+    }
+  }
+  .forgotPassword {
+    width: 128px;
+    height: 17px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #000000;
+    &:hover {
+      color: #526673;
+    }
+  }
 }
+
+
