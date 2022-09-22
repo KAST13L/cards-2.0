@@ -12,8 +12,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../Header/Pages";
-import {RegistrationParamsType} from "../../api/auth-api";
 import {AppRootStateType} from "../../app/redux/store";
+import {RegisterParamsType} from "../../api/api";
 
 
 export const Registration = () => {
@@ -65,7 +65,7 @@ export const Registration = () => {
             return errors
         },
         onSubmit: values => {
-            const registrationValues: RegistrationParamsType = {email: values.email, password: values.password}
+            const registrationValues: RegisterParamsType = {email: values.email, password: values.password}
             dispatch(registrationTC(registrationValues))
             formik.resetForm()
         },

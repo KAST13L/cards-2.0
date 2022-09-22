@@ -1,4 +1,4 @@
-import {AuthApi, RegistrationParamsType} from "../../api/auth-api";
+import {authAPI, RegisterParamsType} from "../../api/api";
 import {ThunkType} from "./store";
 import {setAppErrorAC, setAppStatusAC} from "./app-reducer";
 
@@ -22,9 +22,9 @@ export const authReducer = (state = initialState, action: AuthActionsType): Init
 
 export const setIsRegisterAC = (isRegister: boolean) => ({type:'SET_IS_REGISTER', isRegister} as const )
 
-export const registrationTC = (data: RegistrationParamsType): ThunkType => (dispatch) => {
+export const registrationTC = (data: RegisterParamsType): ThunkType => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
-    AuthApi.registration(data)
+    authAPI.register(data)
         .then(res => {
             dispatch(setAppStatusAC('succeeded'))
             dispatch(setIsRegisterAC(true))
