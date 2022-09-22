@@ -9,17 +9,16 @@ import {
     Button,
     Checkbox,
     FormControl,
-    FormControlLabel, FormGroup,
+    FormControlLabel,
+    FormGroup,
     FormLabel,
     Grid,
-    IconButton,
-    InputAdornment,
     TextField
 } from '@material-ui/core';
 import s from './Login.module.scss';
 import {styleBtn, styleForm, styleInput, styleRememberMe, styleRequired} from './LoginMUI';
-import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {Loader} from '../../components/c7-Loader/Loader';
+import {VisibleIcon} from '../../components/VisibleIconFroPassword/VisibleIcon';
 
 export const Login = () => {
     const dispatch = useAppDispatch()
@@ -83,14 +82,7 @@ export const Login = () => {
                                     {...formik.getFieldProps('password')}
                                     InputProps={{
                                         endAdornment: (
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                    aria-label="toggle password visibility"
-                                                    onClick={handleClickShowPassword}
-                                                >
-                                                    {!hidden ? <VisibilityOff/> : <Visibility/>}
-                                                </IconButton>
-                                            </InputAdornment>
+                                            <VisibleIcon isVisible={hidden} setIsVisible={handleClickShowPassword}/>
                                         )
                                     }}
                                 />
