@@ -6,7 +6,7 @@ import FormGroup from '@mui/material/FormGroup';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useAppDispatch} from "../../../common/hooks/hooks";
-import {registerTC} from "../../../app/redux/auth-reducer";
+import {registerTC} from "../../../redux/auth-reducer";
 import {PATH} from "../../Header/Pages";
 import {PasswordInput} from "../../../common/components/PasswordInput/PasswordInput";
 

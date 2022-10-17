@@ -5,10 +5,10 @@ import {
   RegisterParamsType,
   SetPasswordDataType,
   UpdateProfileDataType
-} from '../../api/api';
+} from '../api/api';
 import {RootThunkType} from "./store";
 import {setAppIsInitializedAC, setAppStatusAC, setAppSuccessAC} from "./app-reducer";
-import {errorUtils} from "../../common/utils/error-utils";
+import {errorUtils} from "../common/utils/error-utils";
 
 const initialState = {
   _id: '' as string | undefined,
@@ -109,7 +109,35 @@ export const logoutTC = (): RootThunkType => async (dispatch) => {
   }
 }
 
-export const forgotPassTC = ({email}: { email: string }): RootThunkType<Promise<boolean>> => async (dispatch) => {
+export const registerTC = (data: RegisterParamsType): RootThunkType<Promise<boolean>> => async (dispatch) => {
+  dispatch(setAppStatusAC('loading'))
+  try {
+    await authAPI.register(data)
+    dispatch(setAppStatusAC('succeeded'))
+    dispatch(setAppSuccessAC('You are successfully registered'))
+    return true
+  } catch (e: any) {
+    dispatch(setAppStatusAC('failed'))
+    errorUtils(e, dispatch)
+    return false
+  }
+}
+
+export const updateProfileTC = (data: UpdateProfileDataType): RootThunkType => async (dispatch) => {
+  dispatch(setAppStatusAC('loading'))
+  try {
+    let res = await authAPI.updateProfile(data)
+    dispatch(updateProfileAC(res.data.updatedUser))
+    dispatch(setAppSuccessAC('Profile updated successfully'))
+  } catch (e: any) {
+    errorUtils(e, dispatch)
+  } finally {
+    dispatch(setAppStatusAC('idle'))
+  }
+}
+
+
+export const forgotPasswordTC = ({email}: { email: string }): RootThunkType<Promise<boolean>> => async (dispatch) => {
   // replace url in href to your gh-page address
   const message = {'message': '<div style="padding: 15px; font-weight: bold">\n Trouble with sign in? <br>\n There is easy way to restore your password. <br>\n Just click on link below and follow the instructions. We’ll have you up and running in no time.  <br>\n \n <a href="https://ticket1201.github.io/cards_quiz/#/set-new-password/$token$">Link</a><br>\n If you did not make this request then please ignore this email.\n</div>'}
 
@@ -135,33 +163,6 @@ export const setNewPassTC = (data: SetPasswordDataType): RootThunkType<Promise<b
   } catch (e: any) {
     errorUtils(e, dispatch)
     return false
-  } finally {
-    dispatch(setAppStatusAC('idle'))
-  }
-}
-
-export const registerTC = (data: RegisterParamsType): RootThunkType<Promise<boolean>> => async (dispatch) => {
-  dispatch(setAppStatusAC('loading'))
-  try {
-    await authAPI.register(data)
-    dispatch(setAppStatusAC('succeeded'))
-    dispatch(setAppSuccessAC('You are successfully registered'))
-    return true
-  } catch (e: any) {
-    dispatch(setAppStatusAC('failed'))
-    errorUtils(e, dispatch)
-    return false
-  }
-}
-
-export const updateProfileTC = (data: UpdateProfileDataType): RootThunkType => async (dispatch) => {
-  dispatch(setAppStatusAC('loading'))
-  try {
-    let res = await authAPI.updateProfile(data)
-    dispatch(updateProfileAC(res.data.updatedUser))
-    dispatch(setAppSuccessAC('Profile updated successfully'))
-  } catch (e: any) {
-    errorUtils(e, dispatch)
   } finally {
     dispatch(setAppStatusAC('idle'))
   }
