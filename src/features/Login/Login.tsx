@@ -6,7 +6,7 @@ import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import {LoginForm} from './LoginForm/LoginForm';
 import {useAppSelector} from "../../common/hooks/hooks";
-import {PATH} from "../Header/Pages";
+import {PATH} from "../../common/enum/Path";
 
 export const Login = () => {
     const userId = useAppSelector(state => state.auth._id)

@@ -9,8 +9,8 @@ import Button from '@mui/material/Button';
 import React from 'react';
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {loginTC} from "../../../redux/auth-reducer";
-import {PATH} from "../../Header/Pages";
 import {PasswordInput} from "../../../common/components/PasswordInput/PasswordInput";
+import {PATH} from "../../../common/enum/Path";
 
 type LoginFormType = {
     email: string

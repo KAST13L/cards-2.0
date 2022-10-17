@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { PATH } from "./Pages";
 import s from "./Header.module.scss";
+import {PATH} from "../../common/enum/Path";
 
 export const Header = () => {
   return (

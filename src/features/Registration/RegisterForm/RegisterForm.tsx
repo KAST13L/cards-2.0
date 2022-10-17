@@ -7,8 +7,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {registerTC} from "../../../redux/auth-reducer";
-import {PATH} from "../../Header/Pages";
 import {PasswordInput} from "../../../common/components/PasswordInput/PasswordInput";
+import {PATH} from "../../../common/enum/Path";
 
 export type RegisterFormType = {
     email: string

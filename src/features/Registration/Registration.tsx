@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import s from '../Login/Login.module.scss';
 import FormLabel from '@mui/material/FormLabel';
 import RegisterForm from './RegisterForm/RegisterForm';
-import {PATH} from "../Header/Pages";
+import {PATH} from "../../common/enum/Path";
 
 export const Registration = () => {
     return (
