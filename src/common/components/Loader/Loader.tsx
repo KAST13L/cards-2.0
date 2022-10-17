@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './Lodader.module.scss'
+import s from './Loader.module.scss'
 import {CircularProgress} from '@material-ui/core';
 
 export const Loader = () => {

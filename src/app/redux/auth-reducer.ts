@@ -1,122 +1,168 @@
-import {setAppErrorAC, setAppStatusAC, setAppSuccessAC} from './app-reducer';
-import {ThunkType} from './store';
-import {authAPI, AuthResponseType, RegisterParamsType} from '../../api/api';
+import {
+  authAPI,
+  AuthResponseType,
+  LoginParamsType,
+  RegisterParamsType,
+  SetPasswordDataType,
+  UpdateProfileDataType
+} from '../../api/api';
+import {RootThunkType} from "./store";
+import {setAppIsInitializedAC, setAppStatusAC, setAppSuccessAC} from "./app-reducer";
+import {errorUtils} from "../../common/utils/error-utils";
 
-type InitialAuthStateType = LoginStateType & {isRegister: boolean}
-const initialState: InitialAuthStateType = {
-    data: {
-        _id: '',
-        email: '',
-        name: '',
-        avatar: '',
-        publicCardPacksCount: 0,  // количество колод
-        created: new Date(),
-        updated: new Date(),
-        isAdmin: false,
-        verified: false, // подтвердил ли почту
-        rememberMe: false,
-        error: ''
-    },
-    isAuth: false,
-    isRegister: false
+const initialState = {
+  _id: '' as string | undefined,
+  email: '',
+  name: '',
+  avatar: '',
+  publicCardPacksCount: null as number | null
 }
 
-export const authReducer = (state: InitialAuthStateType = initialState, action: AuthActionType): InitialAuthStateType => {
-    switch (action.type) {
-        case 'LOGIN/GET-USER-DATA':
-            return {...state, data: action.data, isAuth: action.isAuth}
-        case 'LOGIN/UPDATE-USER-DATA-INFO':
-            return {...state, data: action.data}
-        case 'SET_IS_REGISTER':{
-            return {...state, isRegister: action.isRegister}
-        }
-        case "LOG_OUT":{
-            return {...state, isAuth:false, data: {_id: '', email: '', name: '',error:'',rememberMe:false,verified:false,isAdmin:false,updated:null,created:null,avatar:'',publicCardPacksCount:null}}
-        }
-        default:
-            return state
-    }
+export type AuthInitialStateType = typeof initialState
+
+export const authReducer = (state: AuthInitialStateType = initialState, action: AuthActionType): AuthInitialStateType => {
+  switch (action.type) {
+    case 'auth/AUTH_ME':
+    case 'auth/SET_LOGIN_DATA':
+    case 'auth/UPDATE_PROFILE':
+      return {...state, ...action.payload}
+    case 'auth/LOG_OUT':
+      return {_id: '', email: '', name: '', avatar: '', publicCardPacksCount: null}
+    default :
+      return state
+  }
 }
 
-// action
-export const setIsRegisterAC = (isRegister: boolean) => ({type:'SET_IS_REGISTER', isRegister} as const )
-export const getUserData = (data: AuthResponseType, isAuth: boolean) => ({type: 'LOGIN/GET-USER-DATA', data, isAuth} as const)
-export const updateUserDataInfo = (data: AuthResponseType) => ({type: 'LOGIN/UPDATE-USER-DATA-INFO', data} as const)
-export const LogoutAC = () => ({type: 'LOG_OUT'} as const)
-
-// thunk
-export const loginTC = (email: string, password: string, rememberMe: boolean): ThunkType => async dispatch => {
-    try {
-        dispatch(setAppStatusAC('loading'))
-        const res = await authAPI.login({email, password, rememberMe})
-        dispatch(getUserData(res.data, true));
-    } catch (e: any) {
-        const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
-        dispatch(setAppErrorAC(error))
-    } finally {
-        dispatch(setAppStatusAC('idle'));
-    }
-}
-
-export const registrationTC = (data: RegisterParamsType): ThunkType => (dispatch) => {
-    dispatch(setAppStatusAC('loading'))
-    authAPI.register(data)
-        .then(res => {
-            dispatch(setAppStatusAC('succeeded'))
-            dispatch(setIsRegisterAC(true))
-        })
-        .catch((e) => {
-            if (e.response.data.error){
-                dispatch(setAppErrorAC(e.response.data.error))
-                dispatch(setAppStatusAC('failed'))
-            }
-        })
-        .finally(()=>{
-            dispatch(setIsRegisterAC(false))
-        })
-}
-
-export const updateUserInfo = (name: string, avatar: string): ThunkType => async dispatch => {
-    try {
-        dispatch(setAppStatusAC('loading'))
-        let temp: string = avatar
-        temp = ' '
-        const data = {name, avatar: temp}
-        const res = await authAPI.updateProfile(data)
-        dispatch(updateUserDataInfo(res.data.updatedUser))
-    } catch (e: any) {
-        const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
-        dispatch(setAppErrorAC(error))
-    } finally {
-        dispatch(setAppStatusAC('idle'))
-    }
-}
-
-export const logoutTC = (): ThunkType => async (dispatch) => {
-    dispatch(setAppStatusAC('loading'))
-    try {
-        await authAPI.logout()
-        dispatch(LogoutAC())
-        dispatch(setIsRegisterAC(false))
-        dispatch(setAppSuccessAC('You are log out successfully'))
-    } catch (e: any) {
-        if (e.response.data.error){
-            dispatch(setAppErrorAC(e.response.data.error))
-            dispatch(setAppStatusAC('failed'))
-        }
-    } finally {
-        dispatch(setAppStatusAC('idle'))
-    }
-}
-
-// type
+// types
+type AuthMeActionType = ReturnType<typeof authMeAC>
+type SetLoginDataActionType = ReturnType<typeof setLoginDataAC>
+type UpdateProfileActionType = ReturnType<typeof updateProfileAC>
+type LogoutActionType = ReturnType<typeof logoutAC>
 export type AuthActionType =
-    ReturnType<typeof getUserData> |
-    ReturnType<typeof updateUserDataInfo>|
-    ReturnType<typeof LogoutAC>|
-    ReturnType<typeof setIsRegisterAC>
+    AuthMeActionType
+    | SetLoginDataActionType
+    | LogoutActionType
+    | UpdateProfileActionType
 
-type LoginStateType = {
-    data: AuthResponseType
-    isAuth: boolean
+// ACs
+export const authMeAC = (payload: AuthResponseType) => {
+  return {
+    type: 'auth/AUTH_ME',
+    payload
+  } as const
+}
+export const setLoginDataAC = (payload: AuthResponseType) => {
+  return {
+    type: 'auth/SET_LOGIN_DATA',
+    payload
+  } as const
+}
+export const updateProfileAC = (payload: AuthResponseType) => {
+  return {
+    type: 'auth/UPDATE_PROFILE',
+    payload
+  } as const
+}
+export const logoutAC = () => {
+  return {
+    type: 'auth/LOG_OUT'
+  } as const
+}
+
+// TCs
+export const authMeTC = (): RootThunkType => async (dispatch) => {
+  setAppStatusAC('loading')
+  try {
+    const res = await authAPI.me()
+    dispatch(authMeAC(res.data))
+  } catch (e) {
+    //Ignore auth me errors
+  } finally {
+    setAppStatusAC('idle')
+    dispatch(setAppIsInitializedAC(true))
+  }
+}
+
+export const loginTC = (data: LoginParamsType): RootThunkType => async (dispatch) => {
+  dispatch(setAppStatusAC('loading'))
+  try {
+    const res = await authAPI.login(data)
+    dispatch(setLoginDataAC(res.data))
+    dispatch(setAppSuccessAC('You are sign in successfully'))
+  } catch (e: any) {
+    errorUtils(e, dispatch)
+  } finally {
+    dispatch(setAppStatusAC('idle'))
+  }
+}
+
+export const logoutTC = (): RootThunkType => async (dispatch) => {
+  dispatch(setAppStatusAC('loading'))
+  try {
+    await authAPI.logout()
+    dispatch(logoutAC())
+    dispatch(setAppSuccessAC('You are log out successfully'))
+  } catch (e: any) {
+    errorUtils(e, dispatch)
+  } finally {
+    dispatch(setAppStatusAC('idle'))
+  }
+}
+
+export const forgotPassTC = ({email}: { email: string }): RootThunkType<Promise<boolean>> => async (dispatch) => {
+  // replace url in href to your gh-page address
+  const message = {'message': '<div style="padding: 15px; font-weight: bold">\n Trouble with sign in? <br>\n There is easy way to restore your password. <br>\n Just click on link below and follow the instructions. We’ll have you up and running in no time.  <br>\n \n <a href="https://ticket1201.github.io/cards_quiz/#/set-new-password/$token$">Link</a><br>\n If you did not make this request then please ignore this email.\n</div>'}
+
+  dispatch(setAppStatusAC('loading'))
+
+  try {
+    await authAPI.forgotPassword({email, ...message})
+    return true
+  } catch (e: any) {
+    errorUtils(e, dispatch)
+    return false
+  } finally {
+    dispatch(setAppStatusAC('idle'))
+  }
+}
+
+export const setNewPassTC = (data: SetPasswordDataType): RootThunkType<Promise<boolean>> => async (dispatch) => {
+  dispatch(setAppStatusAC('loading'))
+  try {
+    await authAPI.setNewPassword(data)
+    dispatch(setAppSuccessAC('You are successfully reset password'))
+    return true
+  } catch (e: any) {
+    errorUtils(e, dispatch)
+    return false
+  } finally {
+    dispatch(setAppStatusAC('idle'))
+  }
+}
+
+export const registerTC = (data: RegisterParamsType): RootThunkType<Promise<boolean>> => async (dispatch) => {
+  dispatch(setAppStatusAC('loading'))
+  try {
+    await authAPI.register(data)
+    dispatch(setAppStatusAC('succeeded'))
+    dispatch(setAppSuccessAC('You are successfully registered'))
+    return true
+  } catch (e: any) {
+    dispatch(setAppStatusAC('failed'))
+    errorUtils(e, dispatch)
+    return false
+  }
+}
+
+export const updateProfileTC = (data: UpdateProfileDataType): RootThunkType => async (dispatch) => {
+  dispatch(setAppStatusAC('loading'))
+  try {
+    let res = await authAPI.updateProfile(data)
+    dispatch(updateProfileAC(res.data.updatedUser))
+    dispatch(setAppSuccessAC('Profile updated successfully'))
+  } catch (e: any) {
+    errorUtils(e, dispatch)
+  } finally {
+    dispatch(setAppStatusAC('idle'))
+  }
 }
