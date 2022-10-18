@@ -21,7 +21,7 @@ export const PasswordRecovery = () => {
     const onSubmit: SubmitHandler<InputsType> = async (data: { email: string }) => {
         let res = await dispatch(forgotPasswordTC(data))
         if (res) {
-            navigate(PATH.LOGIN)
+            navigate(`${PATH.CHECK_EMAIL}/${data.email}`)
         }
     }
 
