@@ -1,0 +1,13 @@
+@mixin authContainer() {
+  width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  text-align: center;
+}
+@mixin authTitle() {
+  text-align: center;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 32px;
+  margin: 0 0 30px;
+}

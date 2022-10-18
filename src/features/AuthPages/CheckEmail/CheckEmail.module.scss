@@ -1,6 +1,8 @@
+@import '../cards-2.0/src/common/style/Variables';
 .container {
-  width: 600px;
-  margin: 0 auto;
-  padding: 30px;
-  text-align: center;
+  @include authContainer();
+
+  .title {
+    @include authTitle();
+  }
 }

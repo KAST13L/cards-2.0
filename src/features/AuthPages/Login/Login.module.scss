@@ -1,18 +1,14 @@
+@import '../cards-2.0/src/common/style/Variables';
+
+
 .container {
-  width: 600px;
-  margin: 0 auto;
-  padding: 30px;
-  text-align: center;
+  @include authContainer();
 
   .FormControl {
     width: 100%;
 
     .title {
-      text-align: center;
-      font-weight: 600;
-      font-size: 32px;
-      line-height: 32px;
-      margin: 0 0 30px;
+      @include authTitle();
     }
 
     .wrapper {

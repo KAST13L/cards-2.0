@@ -39,7 +39,7 @@ export const EnteringANewPassword = () => {
 
   return (
       <Paper className={s.container} elevation={6}>
-        <h2>Create new password</h2>
+        <div className={s.title}>Create new password</div>
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
           <PasswordInput isFullWidth={true} register={register} name={'password'} options={{
             required: 'Password is required', minLength: {

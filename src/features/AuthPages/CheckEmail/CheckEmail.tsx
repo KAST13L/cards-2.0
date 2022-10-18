@@ -13,7 +13,7 @@ export const CheckEmail = () => {
 
   return (
       <Paper className={s.container} elevation={6}>
-        <h2>Check Email</h2>
+        <div className={s.title}>Check Email</div>
         <img src={img} alt="envelope" className={s.img}/>
         <p className={s.text}>We’ve sent an Email with instructions to {email}</p>
         <Button variant={'contained'} onClick={() => navigate(PATH.LOGIN)} fullWidth>Back to login</Button>
