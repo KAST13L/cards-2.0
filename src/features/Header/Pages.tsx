@@ -18,8 +18,8 @@ export function Pages() {
         <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery />} />
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.REGISTRATION} element={<Registration />} />
-        <Route path={PATH.NEW_PASSWORD} element={<EnteringANewPassword />} />
-        <Route path={PATH.CHECK_EMAIL} element={<CheckEmail />} />
+        <Route path={`${PATH.NEW_PASSWORD}/:token`} element={<EnteringANewPassword />} />
+        <Route path={`${PATH.CHECK_EMAIL}/:email`} element={<CheckEmail />} />
       </Routes>
     </div>
   );

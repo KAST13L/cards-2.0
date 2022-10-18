@@ -2,7 +2,6 @@ import React from 'react';
 import {Navigate, NavLink} from 'react-router-dom';
 import s from './Login.module.scss';
 import Paper from '@mui/material/Paper';
-import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import {LoginForm} from './LoginForm/LoginForm';
 import {useAppSelector} from "../../../common/hooks/hooks";
@@ -17,9 +16,7 @@ export const Login = () => {
     return (
         <Paper className={s.container} elevation={6}>
             <FormControl className={s.FormControl}>
-                <FormLabel>
-                    <h2 className={s.title}>Sign in</h2>
-                </FormLabel>
+                    <h1 className={s.title}>Sign in</h1>
                 <LoginForm/>
             </FormControl>
             <p className={s.text}>Do not have an account ?</p>
