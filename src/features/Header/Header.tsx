@@ -13,7 +13,7 @@ export const Header = () => {
                 <NavLinkItem path={PATH.PASSWORD_RECOVERY} title={"Password recovery+"}/>
                 <NavLinkItem path={PATH.CHECK_EMAIL} title={"Check email"}/>
                 <NavLinkItem path={PATH.NEW_PASSWORD} title={"New password"}/>
-                <div className={s.link}>Hover me!</div>
+                <div className={s.link} style={{background:'forestgreen'}}>Hover me!</div>
             </div>
         </div>
     );
