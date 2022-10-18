@@ -59,16 +59,17 @@ export const LoginForm = () => {
                 }
             }} label={'Password'}/>
             {errors.password && <div style={{color: 'red'}}>{errors.password.message}</div>}
-            <FormControlLabel label={'Remember me'} style={{marginTop: '8px'}}
-                              control={<Controller name="rememberMe" control={control}
-                                                   render={({field}) => <Checkbox {...field}
-                                                                                  checked={!!field.value}/>}/>}/>
-
-            <NavLink to={PATH.PASSWORD_RECOVERY} className={s.forgotPassword}>Forgot password ?</NavLink>
+            <div style={{display:'flex', justifyContent:'space-between'}}>
+                <FormControlLabel label={'Remember me'} style={{marginTop: '8px'}}
+                                  control={<Controller name="rememberMe" control={control}
+                                                       render={({field}) => <Checkbox {...field}
+                                                                                      checked={!!field.value}/>}/>}/>
+                <NavLink to={PATH.PASSWORD_RECOVERY} className={s.forgotPassword}>Forgot password ?</NavLink>
+            </div>
             <Button type={'submit'}
                     variant={'contained'}
                     color={'primary'}
-                    style={{marginTop: '70px'}}
+                    style={{marginTop: '30px'}}
                     disabled={requestStatus === 'loading'}
                     fullWidth>
                 Sign in

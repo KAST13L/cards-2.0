@@ -2,6 +2,7 @@
   width: 600px;
   margin: 0 auto;
   padding: 30px;
+  text-align: center  ;
 
   .FormControl {
     width: 100%;
@@ -19,10 +20,8 @@
 
       .forgotPassword {
         font-weight: 500;
-        margin-top: 30px;
+        margin-top: 20px;
         text-decoration: none;
-        display: flex;
-        justify-content: flex-end;
       }
     }
   }
