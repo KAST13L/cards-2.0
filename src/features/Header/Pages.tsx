@@ -1,12 +1,12 @@
 import React from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {Login} from "../Login/Login";
-import {PasswordRecovery} from "../PasswordRecovery/PasswordRecovery";
+import {Login} from "../AuthPages/Login/Login";
+import {PasswordRecovery} from "../AuthPages/PasswordRecovery/PasswordRecovery";
 import {Profile} from "../Profile/Profile";
-import {Registration} from "../Registration/Registration";
-import {EnteringANewPassword} from "../EnteringANewPassword/EnteringANewPassword";
+import {Registration} from "../AuthPages/Registration/Registration";
+import {EnteringANewPassword} from "../AuthPages/EnteringANewPassword/EnteringANewPassword";
 import {PATH} from "../../common/enum/Path";
-import {CheckEmail} from "../CheckEmail/CheckEmail";
+import {CheckEmail} from "../AuthPages/CheckEmail/CheckEmail";
 
 export function Pages() {
   return (

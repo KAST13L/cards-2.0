@@ -5,10 +5,10 @@ import s from '../../Login/Login.module.scss';
 import FormGroup from '@mui/material/FormGroup';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {useAppDispatch} from "../../../common/hooks/hooks";
-import {registerTC} from "../../../redux/auth-reducer";
-import {PasswordInput} from "../../../common/components/PasswordInput/PasswordInput";
-import {PATH} from "../../../common/enum/Path";
+import {useAppDispatch} from "../../../../common/hooks/hooks";
+import {registerTC} from "../../../../redux/auth-reducer";
+import {PasswordInput} from "../../../../common/components/PasswordInput/PasswordInput";
+import {PATH} from "../../../../common/enum/Path";
 
 export type RegisterFormType = {
     email: string
