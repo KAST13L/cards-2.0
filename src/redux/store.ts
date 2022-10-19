@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
 });
 
-
+// dasd
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
 
 
