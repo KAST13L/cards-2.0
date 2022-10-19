@@ -139,7 +139,7 @@ export const updateProfileTC = (data: UpdateProfileDataType): RootThunkType => a
 
 export const forgotPasswordTC = ({email}: { email: string }): RootThunkType<Promise<boolean>> => async (dispatch) => {
   // replace url in href to your gh-page address
-  let massageForEmail = '<div style="padding: 15px; font-weight: bold">\n Trouble with sign in? <br>\n There is easy way to restore your password. <br>\n Just click on link below and follow the instructions. We’ll have you up and running in no time.  <br>\n \n <a href="http://localhost:3000/cards-2.0#/enteringANewPassword/$token$">Link</a><br>\n If you did not make this request then please ignore this email.\n</div>';
+  let massageForEmail = '<div style="padding: 15px; font-weight: bold">\n Trouble with sign in? <br>\n There is easy way to restore your password. <br>\n Just click on link below and follow the instructions. We’ll have you up and running in no time.  <br>\n \n <a href="https://kast13l.github.io/cards-2.0#/enteringANewPassword/$token$">Link</a><br>\n If you did not make this request then please ignore this email.\n</div>';
   const message = {'message': massageForEmail}
 
   dispatch(setAppStatusAC('loading'))
