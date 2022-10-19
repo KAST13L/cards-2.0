@@ -64,7 +64,7 @@ export const LoginForm = () => {
                                   control={<Controller name="rememberMe" control={control}
                                                        render={({field}) => <Checkbox {...field}
                                                                                       checked={!!field.value}/>}/>}/>
-                <NavLink to={PATH.PASSWORD_RECOVERY} className={s.forgotPassword}>Forgot password ?</NavLink>
+                <NavLink to={PATH.FORGOT_PASSWORD} className={s.forgotPassword}>Forgot password ?</NavLink>
             </div>
             <Button type={'submit'}
                     variant={'contained'}

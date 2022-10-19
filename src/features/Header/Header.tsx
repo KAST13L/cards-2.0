@@ -10,7 +10,7 @@ export const Header = () => {
                 <NavLinkItem path={PATH.PROFILE} title={"Profile"}/>
                 <NavLinkItem path={PATH.LOGIN} title={"Login"}/>
                 <NavLinkItem path={PATH.REGISTRATION} title={"Registration"}/>
-                <NavLinkItem path={PATH.PASSWORD_RECOVERY} title={"Password recovery+"}/>
+                <NavLinkItem path={PATH.FORGOT_PASSWORD} title={"Forgot password"}/>
                 <NavLinkItem path={PATH.CHECK_EMAIL} title={"Check email"}/>
                 <NavLinkItem path={PATH.NEW_PASSWORD} title={"New password"}/>
                 <div className={s.link}>Hover me!</div>

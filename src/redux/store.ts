@@ -8,9 +8,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
 });
 
-// dasd
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
-
 
 export type RootStateType = ReturnType<typeof store.getState>
 
@@ -24,7 +22,6 @@ export type RootDispatchType = ThunkDispatch<RootStateType, unknown, RootActions
 // types to dispatch thunks from thunks
 
 export type RootThunkType<ReturnType = void> = ThunkAction<ReturnType, RootStateType, unknown, RootActionsType>
-
 
 // @ts-ignore
 window.store = store

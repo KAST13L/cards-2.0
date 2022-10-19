@@ -1,6 +1,6 @@
 export const PATH = {
     LOGIN: "/login",
-    PASSWORD_RECOVERY: "/passwordRecovery",
+    FORGOT_PASSWORD: "/forgotPassword",
     REGISTRATION: "/registration",
     NEW_PASSWORD: "/enteringANewPassword",
     PROFILE: "/profile",

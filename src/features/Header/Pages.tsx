@@ -1,7 +1,7 @@
 import React from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "../AuthPages/Login/Login";
-import {PasswordRecovery} from "../AuthPages/PasswordRecovery/PasswordRecovery";
+import {ForgotPassword} from "../AuthPages/PasswordRecovery/ForgotPassword";
 import {Profile} from "../Profile/Profile";
 import {Registration} from "../AuthPages/Registration/Registration";
 import {EnteringANewPassword} from "../AuthPages/EnteringANewPassword/EnteringANewPassword";
@@ -15,7 +15,7 @@ export function Pages() {
         <Route path={"/"} element={<Navigate to={PATH.PROFILE} />} />
 
         <Route path={PATH.LOGIN} element={<Login />} />
-        <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery />} />
+        <Route path={PATH.FORGOT_PASSWORD} element={<ForgotPassword />} />
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.REGISTRATION} element={<Registration />} />
         <Route path={`${PATH.NEW_PASSWORD}/:token`} element={<EnteringANewPassword />} />

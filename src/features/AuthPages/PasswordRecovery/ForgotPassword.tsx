@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./PasswordRecovery.module.scss";
+import s from "./ForgotPassword.module.scss";
 import Paper from "@mui/material/Paper";
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {NavLink, useNavigate} from "react-router-dom";
@@ -13,7 +13,7 @@ type InputsType = {
     email: string
 }
 
-export const PasswordRecovery = () => {
+export const ForgotPassword = () => {
 
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
