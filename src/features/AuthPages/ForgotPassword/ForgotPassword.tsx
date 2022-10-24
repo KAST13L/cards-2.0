@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {NavLink, useNavigate} from "react-router-dom";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {forgotPasswordTC} from "../../../redux/auth-reducer";
+import {forgotPasswordTC} from "../auth-reducer";
 import {PATH} from "../../../common/enum/Path";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";

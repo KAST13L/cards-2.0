@@ -3,7 +3,7 @@ import {Navigate, useParams} from "react-router-dom";
 import s from "./EnteringANewPassword.module.scss";
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {setNewPassTC} from "../../../redux/auth-reducer";
+import {setNewPassTC} from "../auth-reducer";
 import { PATH } from "../../../common/enum/Path";
 import Paper from "@mui/material/Paper";
 import {PasswordInput} from "../../../common/components/PasswordInput/PasswordInput";

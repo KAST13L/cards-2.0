@@ -1,6 +1,6 @@
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {Alert, AlertColor, Snackbar} from "@mui/material";
-import {setAppErrorAC, setAppSuccessAC} from "../../../redux/app-reducer";
+import {setAppErrorAC, setAppSuccessAC} from "../../../app/app-reducer";
 
 export const ErrorSnackbar = () => {
   const dispatch = useAppDispatch()

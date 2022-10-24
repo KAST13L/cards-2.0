@@ -1,7 +1,7 @@
 import {AnyAction, applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import { appReducer} from "./app-reducer";
-import { authReducer} from "./auth-reducer";
+import { authReducer} from "../features/AuthPages/auth-reducer";
 
 const rootReducer = combineReducers({
   app: appReducer,

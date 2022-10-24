@@ -4,7 +4,7 @@ import s from "./Header.module.scss"
 import {NavLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {PATH} from "../../common/enum/Path";
-import {logoutTC} from "../../redux/auth-reducer";
+import {logoutTC} from "../AuthPages/auth-reducer";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import {LinearProgress} from "@material-ui/core";

@@ -4,7 +4,7 @@ import {Pages} from "../features/Header/Pages";
 import {ErrorSnackbar} from "../common/components/ErrorSnackbar/ErrorSnackbar";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {Loader} from "../common/components/Loader/Loader";
-import {authMeTC} from "../redux/auth-reducer";
+import {authMeTC} from "../features/AuthPages/auth-reducer";
 
 export const App = () => {
     const dispatch = useAppDispatch()

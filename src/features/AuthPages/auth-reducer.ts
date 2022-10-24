@@ -5,10 +5,10 @@ import {
   RegisterParamsType,
   SetPasswordDataType,
   UpdateProfileDataType
-} from '../api/api';
-import {RootThunkType} from "./store";
-import {setAppIsInitializedAC, setAppStatusAC, setAppSuccessAC} from "./app-reducer";
-import {errorUtils} from "../common/utils/error-utils";
+} from '../../api/api';
+import {RootThunkType} from "../../app/store";
+import {setAppIsInitializedAC, setAppStatusAC, setAppSuccessAC} from "../../app/app-reducer";
+import {errorUtils} from "../../common/utils/error-utils";
 
 const initialState = {
   _id: '' as string | undefined,

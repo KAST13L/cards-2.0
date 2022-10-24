@@ -6,7 +6,7 @@ import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
 import s from './Profile.module.scss'
 import {EditableSpan} from '../../common/components/EditableSpan/EditableSpan';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import {logoutTC, updateProfileTC} from "../../redux/auth-reducer";
+import {logoutTC, updateProfileTC} from "../AuthPages/auth-reducer";
 import ava from '../../assets/images/avatar.jpg'
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../common/enum/Path";
