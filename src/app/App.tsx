@@ -14,12 +14,12 @@ export const App = () => {
         dispatch(authMeTC())
     }, [dispatch])
 
-
     if (!isInitialized) {
         return (<Loader/>)
     }
+
     return (
-        <div >
+        <div>
             <ErrorSnackbar/>
             <Header/>
             <Pages/>
