@@ -30,7 +30,7 @@ export const ForgotPassword = () => {
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
             <TextField fullWidth type={'email'} variant={'standard'}
                        label={'Email'} {...register('email', {required: true})} />
-            {errors.email && <span className={s.error}>This field is required</span>}
+            {errors.email && <span style={{color: 'red'}} className={s.error}>This field is required</span>}
             <p>Enter your email address and we will send you further instructions </p>
             <Button type={'submit'} variant={'contained'} fullWidth>
                 Send Instructions
