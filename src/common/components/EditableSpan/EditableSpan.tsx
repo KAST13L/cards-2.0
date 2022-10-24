@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, memo, useState } from "react";
+import React, {ChangeEvent, KeyboardEvent, memo, useState} from "react";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
@@ -55,6 +55,7 @@ export const EditableSpan = memo(
           onKeyDown={onKeyPressHandler}
           fullWidth={true}
           label={"Nickname"}
+          onBlur={saveHandler}
         ></TextField>
         <Button
           size={"small"}

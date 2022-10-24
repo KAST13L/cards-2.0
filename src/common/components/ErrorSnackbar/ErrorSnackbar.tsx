@@ -10,7 +10,6 @@ export const ErrorSnackbar = () => {
   const message = success ? success : error
 
   const handleClose = async () => {
-    // reset error after X seconds
     error && dispatch(setAppErrorAC(null))
     success && dispatch(setAppSuccessAC(null))
   }
