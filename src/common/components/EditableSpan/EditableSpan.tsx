@@ -56,6 +56,7 @@ export const EditableSpan = memo(
           fullWidth={true}
           label={"Nickname"}
           onBlur={saveHandler}
+          autoFocus
         ></TextField>
         <Button
           size={"small"}

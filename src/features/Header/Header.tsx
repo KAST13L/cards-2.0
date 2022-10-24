@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {AppBar, Button, Grid, Menu, MenuItem, Toolbar} from "@mui/material";
+import {AppBar, Button, Menu, MenuItem, Toolbar} from "@mui/material";
 import s from "./Header.module.scss"
 import {NavLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
@@ -13,7 +13,6 @@ export const Header = () => {
 
     const navigate = useNavigate()
     const name = useAppSelector(state => state.auth.name)
-    let status = useAppSelector(state => state.app.status)
     const dispatch = useAppDispatch()
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -37,27 +36,21 @@ export const Header = () => {
     return (
         <AppBar position={'absolute'} className={s.bar} style={{backgroundColor: '#FCFCFC'}}>
             <Toolbar className={s.toolbar}>
-                <Grid container
-                      direction="row"
-                      justifyContent="space-between"
-                      alignItems="center"
-                >
-                    <NavLink className={s.logo} to={PATH.PROFILE}/>
-                    {name
-                        ? <div className={s.wrapper}>
-                            <span className={s.name} onClick={onMenuClickHandler}>{name}</span>
-                            <span className={s.ava} style={{backgroundImage: `url(${ava})`}}
-                                  onClick={onMenuClickHandler}></span>
-                            <Menu open={open} onClose={menuCloseHandler} anchorEl={anchorEl}>
-                                <MenuItem onClick={onProfileClickHandler}
-                                          className={s.menuItem}><PermIdentityIcon/> Profile</MenuItem>
-                                <MenuItem onClick={onLogoutClickHandler} className={s.menuItem}>
-                                    <LogoutOutlinedIcon/> <span>Log Out</span>
-                                </MenuItem>
-                            </Menu>
-                        </div>
-                        : <Button variant={'contained'} onClick={() => navigate(PATH.LOGIN)}>Sign in</Button>}
-                </Grid>
+                <NavLink className={s.logo} to={PATH.PROFILE}/>
+                {name
+                    ? <div className={s.wrapper}>
+                        <span className={s.name} onClick={onMenuClickHandler}>{name}</span>
+                        <span className={s.ava} style={{backgroundImage: `url(${ava})`}}
+                              onClick={onMenuClickHandler}></span>
+                        <Menu open={open} onClose={menuCloseHandler} anchorEl={anchorEl}>
+                            <MenuItem onClick={onProfileClickHandler}
+                                      className={s.menuItem}><PermIdentityIcon/> Profile</MenuItem>
+                            <MenuItem onClick={onLogoutClickHandler} className={s.menuItem}>
+                                <LogoutOutlinedIcon/> <span>Log Out</span>
+                            </MenuItem>
+                        </Menu>
+                    </div>
+                    : <Button variant={'contained'} onClick={() => navigate(PATH.LOGIN)}>Sign in</Button>}
             </Toolbar>
         </AppBar>
     );
