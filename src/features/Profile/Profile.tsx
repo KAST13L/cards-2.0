@@ -10,6 +10,7 @@ import {logoutTC, updateProfileTC} from "../../redux/auth-reducer";
 import ava from '../../assets/images/avatar.jpg'
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../common/enum/Path";
+import {BackToPacksList} from "../../common/components/BackToPacksList/BackToPacksList";
 
 
 export const Profile = () => {
@@ -30,6 +31,11 @@ export const Profile = () => {
 
     return (
         <div>
+            <div className={s.backToPacks}>
+                <Paper elevation={6}>
+                    <BackToPacksList/>
+                </Paper>
+            </div>
             <Paper className={s.container} elevation={6}>
                 <h2 className={s.title}>Personal Information</h2>
                 <div className={s.ava} style={{backgroundImage: `url(${avatar || ava})`}}>

@@ -5,4 +5,5 @@ export const PATH = {
     NEW_PASSWORD: "/new-pass",
     PROFILE: "/profile",
     CHECK_EMAIL: "/check-email",
+    PACKS_LIST:"/packs"
 };

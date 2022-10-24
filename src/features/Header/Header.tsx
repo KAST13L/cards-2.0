@@ -7,15 +7,18 @@ import {PATH} from "../../common/enum/Path";
 import {logoutTC} from "../../redux/auth-reducer";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import ava from '../../assets/images/avatar.jpg'
 import {LinearProgress} from "@material-ui/core";
+import ava from "./../../assets/images/avatar.jpg"
 
 export const Header = () => {
 
-    const navigate = useNavigate()
     const name = useAppSelector(state => state.auth.name)
-    let status = useAppSelector(state => state.app.status)
+    const avatar = useAppSelector(state => state.auth.avatar)
+    const status = useAppSelector(state => state.app.status)
+
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
+
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -42,7 +45,7 @@ export const Header = () => {
                 {name
                     ? <div className={s.wrapper}>
                         <span className={s.name} onClick={onMenuClickHandler}>{name}</span>
-                        <span className={s.ava} style={{backgroundImage: `url(${ava})`}}
+                        <span className={s.ava} style={{backgroundImage: `url(${avatar ? avatar : ava})`}}
                               onClick={onMenuClickHandler}></span>
                         <Menu open={open} onClose={menuCloseHandler} anchorEl={anchorEl}>
                             <MenuItem onClick={onProfileClickHandler}
