@@ -61,7 +61,7 @@ const RegisterForm = () => {
                         }
                     })}
                 />
-                {errors.email && <div style={{color: 'red'}}>{errors.email.message}</div>}
+                <div className={s.authError}>{errors.email && <div>{errors.email.message}</div>}</div>
 
                 <PasswordInput
                     name="password"
@@ -73,7 +73,7 @@ const RegisterForm = () => {
                         }
                     }}
                 />
-                {errors.password && <div style={{color: 'red'}}>{errors.password.message}</div>}
+                <div className={s.authError}>{errors.password && <div>{errors.password.message}</div>}</div>
 
                 <PasswordInput name="confirmPassword"
                                label={'Confirm password'}
@@ -83,8 +83,8 @@ const RegisterForm = () => {
                                        value === password || 'The passwords do not match'
                                }}
                 />
-                {errors.confirmPassword &&
-                    <div style={{color: 'red'}}>{errors.confirmPassword.message}</div>}
+                <div className={s.authError}>{errors.confirmPassword &&
+                    <div>{errors.confirmPassword.message}</div>}</div>
 
                 <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop: '40px'}}
                         fullWidth>

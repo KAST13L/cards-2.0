@@ -27,10 +27,10 @@ export const ForgotPassword = () => {
 
     return <Paper className={s.container} elevation={6}>
         <h1>Forgot your password?</h1>
-        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+        <form onSubmit={handleSubmit(onSubmit)} >
             <TextField fullWidth type={'email'} variant={'standard'}
                        label={'Email'} {...register('email', {required: true})} />
-            {errors.email && <span style={{color: 'red'}} className={s.error}>This field is required</span>}
+            <div className={s.authError}>{errors.email && <span >This field is required</span>}</div>
             <p>Enter your email address and we will send you further instructions </p>
             <Button type={'submit'} variant={'contained'} fullWidth>
                 Send Instructions

@@ -46,7 +46,7 @@ export const EnteringANewPassword = () => {
               value: 8, message: 'Password must be more than 8 characters'
             }
           }} label={'Password'}/>
-          {errors.password && <span style={{color:'red'}}>This field is required</span>}
+          <div className={s.error}>{errors.password && <span>This field is required</span>}</div>
           <p>Create new password and we will send you further instructions to email</p>
           <Button type={'submit'} variant={'contained'} fullWidth>
             Create new password

@@ -1,8 +1,8 @@
 export const PATH = {
     LOGIN: "/login",
-    FORGOT_PASSWORD: "/forgotPassword",
-    REGISTRATION: "/registration",
-    NEW_PASSWORD: "/enteringANewPassword",
+    FORGOT_PASSWORD: "/forgot-pass",
+    REGISTRATION: "/reg",
+    NEW_PASSWORD: "/new-pass",
     PROFILE: "/profile",
-    CHECK_EMAIL: "/checkEmail",
+    CHECK_EMAIL: "/check-email",
 };

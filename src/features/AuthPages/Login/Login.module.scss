@@ -14,6 +14,9 @@
     .wrapper {
       width: inherit;
 
+      .authError{
+        @include authError();
+      }
       .forgotPassword {
         font-weight: 500;
         margin-top: 20px;

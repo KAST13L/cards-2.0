@@ -8,11 +8,13 @@ import {logoutTC} from "../../redux/auth-reducer";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import ava from '../../assets/images/avatar.jpg'
+import {LinearProgress} from "@material-ui/core";
 
 export const Header = () => {
 
     const navigate = useNavigate()
     const name = useAppSelector(state => state.auth.name)
+    let status = useAppSelector(state => state.app.status)
     const dispatch = useAppDispatch()
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -52,6 +54,9 @@ export const Header = () => {
                     </div>
                     : <Button variant={'contained'} onClick={() => navigate(PATH.LOGIN)}>Sign in</Button>}
             </Toolbar>
+            <div style={{height: "5px"}}>
+                {status === "loading" && <LinearProgress/>}
+            </div>
         </AppBar>
     );
 };

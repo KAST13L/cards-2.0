@@ -52,13 +52,13 @@ export const LoginForm = () => {
                            }
                        })}
             />
-            {errors.email && <div style={{color: 'red'}}>{errors.email.message}</div>}
+            <div className={s.authError}>{errors.email && <div>{errors.email.message}</div>}</div>
             <PasswordInput register={register} name={'password'} options={{
                 required: 'Password is required', minLength: {
                     value: 8, message: 'Password must be more than 8 characters'
                 }
             }} label={'Password'}/>
-            {errors.password && <div style={{color: 'red'}}>{errors.password.message}</div>}
+            <div className={s.authError}>{errors.password && <div>{errors.password.message}</div>}</div>
             <div style={{display:'flex', justifyContent:'space-between'}}>
                 <FormControlLabel label={'Remember me'} style={{marginTop: '8px'}}
                                   control={<Controller name="rememberMe" control={control}

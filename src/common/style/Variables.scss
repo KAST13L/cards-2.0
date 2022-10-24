@@ -11,3 +11,7 @@
   line-height: 32px;
   margin: 0 0 30px;
 }
+@mixin authError(){
+  color: red;
+  height: 1px;
+}
