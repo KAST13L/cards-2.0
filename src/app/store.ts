@@ -2,10 +2,12 @@ import {AnyAction, applyMiddleware, combineReducers, legacy_createStore} from "r
 import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import { appReducer} from "./app-reducer";
 import { authReducer} from "../features/AuthPages/auth-reducer";
+import {packReducer} from "../features/PacksList/pack-reducer";
 
 const rootReducer = combineReducers({
   app: appReducer,
   auth: authReducer,
+  pack: packReducer,
 });
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
