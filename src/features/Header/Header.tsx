@@ -57,6 +57,7 @@ export const Header = () => {
                     </div>
                     : <Button variant={'contained'} onClick={() => navigate(Path.Login)}>Sign in</Button>}
             </Toolbar>
+            // loader
             <div style={{height: "5px"}}>
                 {status === "loading" && <LinearProgress/>}
             </div>

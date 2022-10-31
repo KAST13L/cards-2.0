@@ -2,7 +2,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {Alert, AlertColor, Snackbar} from "@mui/material";
 import {setAppErrorAC, setAppSuccessAC} from "../../../app/app-reducer";
 
-export const ErrorSnackbar = () => {
+export const ErrorSuccessSnackbar = () => {
   const dispatch = useAppDispatch()
   const error = useAppSelector(state => state.app.error)
   const success = useAppSelector(state => state.app.success)
