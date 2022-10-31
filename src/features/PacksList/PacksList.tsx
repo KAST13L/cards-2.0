@@ -1,69 +1,237 @@
-import React from 'react';
-import s from './PacksList.module.scss'
-import Box from '@mui/material/Box';
-import {DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
-
-const columns: GridColDef[] = [
-    {field: 'id', headerName: 'ID', width: 90},
-    {
-        field: 'firstName',
-        headerName: 'First name',
-        width: 150,
-        editable: true,
-    },
-    {
-        field: 'lastName',
-        headerName: 'Last name',
-        width: 150,
-        editable: true,
-    },
-    {
-        field: 'age',
-        headerName: 'Age',
-        type: 'number',
-        width: 110,
-        editable: true,
-    },
-    {
-        field: 'fullName',
-        headerName: 'Full name',
-        description: 'This column has a value getter and is not sortable.',
-        sortable: false,
-        width: 160,
-        valueGetter: (params: GridValueGetterParams) =>
-            `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    },
-];
-
-const rows = [
-    {id: 1, lastName: 'Snow', firstName: 'Jon', age: 35},
-    {id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42},
-    {id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45},
-    {id: 4, lastName: 'Stark', firstName: 'Arya', age: 16},
-    {id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null},
-    {id: 6, lastName: 'Melisandre', firstName: null, age: 150},
-    {id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44},
-    {id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36},
-    {id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65},
-];
+import React, {useEffect, useState} from 'react';
+import UniversalTable from '../../common/components/Table/UniversalTable';
+import {GridColDef} from '@mui/x-data-grid';
+import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import IconButton from '@mui/material/IconButton';
+import {Link, useNavigate, useSearchParams} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
+import {Search} from '../../common/components/Search/Search';
+import {RangeSlider} from '../../common/components/RangeSlider/RangeSlider';
+import {PacksOwnerSort} from '../../common/components/PacksOwnerSort/PacksOwnerSort';
+import {ClearFilters} from '../../common/components/ClearFilters/ClearFilters';
+import {Paginator} from '../../common/components/Paginator/Paginator';
+import s from './PacksList.module.css'
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import {PackModal} from '../Modals/PackModal';
+import {DeleteModal} from '../Modals/DeleteModal';
+import {convertDateFromIso8601} from '../../common/utils/convertDate';
+import {commonModalState, CommonModalStateType} from '../Modals/commonTypes';
+import {convertObjectToSearchParam} from "../../common/utils/convertObjectToSearchParam";
+import {serializeFormQuery} from "../../common/utils/serializeFormQuery";
+import {pageCountDefault} from "../SearchBar/search-constants";
+import {
+    clearPackSearchFiltersAC,
+    searchPacksByNameAC,
+    searchPacksByOwnerAC,
+    searchPacksByRangeAC,
+    selectSearchPackParams, setPackAllAC, setPackPageAC, setPackPageCountAC
+} from "./pack-search-reducer";
+import deckCoverDefault from '../../assets/images/deckCoverDefault.png'
+import {Path} from "../../common/enum/Path";
+import {getPacksTC} from "./pack-reducer";
 
 export const PacksList = () => {
+
+    const columns: GridColDef[] = [
+        {
+            field: 'deckCover',
+            headerName: 'Cover',
+            sortable: false,
+            flex: 1,
+            renderCell: (params) => (params.row.deckCover
+                    ? <img className={s.cover} src={params.row.deckCover} alt={'deck cover'}/>
+                    : <img className={s.cover} src={deckCoverDefault} alt={'deck cover'}/>
+            )
+        },
+        {
+            field: 'name',
+            headerName: 'Name',
+            flex: 1,
+            renderCell: (params) => (params.row.cardsCount || params.row.user_id === authId ?
+                <Link className={s.link}
+                      to={`${Path.PackPage}/${params.id}`}>{params.row.name}</Link> : params.row.name)
+        },
+        {field: 'cardsCount', headerName: 'Cards', flex: 1},
+        {
+            field: 'updated',
+            headerName: 'Last updated',
+            flex: 1,
+            renderCell: (params) => (convertDateFromIso8601(params.value))
+        },
+        {field: 'user_name', headerName: 'Created by', flex: 1},
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            sortable: false,
+            minWidth: 150,
+            renderCell: (params) => (
+                <>
+                    <IconButton disabled={!params.row.cardsCount} onClick={() => startLearningHandler(params.row._id)}>
+                        <SchoolOutlinedIcon/>
+                    </IconButton>
+                    {params.row.actions && <>
+                        <IconButton
+                            onClick={() => openEditPackModal(params.row._id, params.row.name, params.row.private, params.row.deckCover
+                            )}>
+                            <EditOutlinedIcon/>
+                        </IconButton>
+                        <IconButton onClick={() => openDeletePackModal(params.row._id, params.row.name)}>
+                            <DeleteOutlinedIcon/>
+                        </IconButton>
+                    </>}
+
+                </>
+            ),
+        }
+
+    ];
+
+    const {
+        cardPacks,
+        minCardsCount,
+        maxCardsCount,
+        page,
+        pageCount,
+        cardPacksTotalCount,
+        isToggled
+    } = useAppSelector(state => state.packs)
+    const authId = useAppSelector(state => state.auth._id)
+    const loading = useAppSelector(state => state.app.status)
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
+    const [modalData, setModalData] = useState<CommonModalStateType>(commonModalState)
+
+    const myOwnSearchParams = useAppSelector(selectSearchPackParams)
+    const myQuerySearchParams = convertObjectToSearchParam(myOwnSearchParams)
+
+    const [searchParam, setSearchParam] = useSearchParams()
+    // console.log('searchParam = ', serializeFormQuery(searchParam))
+
+    // Modal logic
+    const closeModal = () => {
+        setModalData(commonModalState)
+    }
+    const openEditPackModal = (_id: string, name: string, isPrivate: boolean, packCover: string) => {
+        setModalData({
+            ...modalData,
+            _id,
+            name,
+            private: isPrivate,
+            packCover,
+            title: 'Edit Pack',
+            openEditPackModal: true
+        })
+    }
+    const openDeletePackModal = (_id: string, name: string) => {
+        setModalData({...modalData, _id, name, title: 'Delete Pack', openDelPackModal: true})
+    }
+    const openAddPackModal = () => {
+        setModalData({...modalData, title: 'Add new pack', openAddPackModal: true})
+    }
+
+    const startLearningHandler = (packId: string) => {
+        navigate(`${Path.LearnPage}/${packId}`);
+    }
+
+
+    // Search, filtration, pagination logic
+    let selectedPagesCount = myOwnSearchParams.pageCount ?? pageCountDefault
+
+    const searchHandler = (value: string) => {
+        dispatch(searchPacksByNameAC(value))
+    }
+
+    const rangeHandler = (min: number, max: number) => {
+        dispatch(searchPacksByRangeAC(min, max, minCardsCount, maxCardsCount))
+    }
+
+    const packsOwnerHandler = (user_id: string) => {
+        dispatch(searchPacksByOwnerAC(user_id))
+    }
+
+    const clearFiltersHandler = () => {
+        dispatch(clearPackSearchFiltersAC())
+    }
+
+    const paginationHandler = (currentPage: number) => {
+        dispatch(setPackPageAC(currentPage))
+    }
+
+    const pagesCountHandler = (newPageCount: string) => {
+        dispatch(setPackPageCountAC(+newPageCount))
+    }
+
+    useEffect(() => {
+        setSearchParam(myQuerySearchParams)
+
+        let id = setTimeout(() => {
+            let sendParams: {}
+            sendParams = {...myQuerySearchParams, pageCount: selectedPagesCount}
+            if (sendParams.hasOwnProperty('user_id')) {
+                sendParams = {...sendParams, ['user_id']: authId}
+            }
+            dispatch(getPacksTC(sendParams))
+        }, 1000)
+        return () => {
+            clearTimeout(id)
+        }
+    }, [dispatch, myOwnSearchParams, isToggled, selectedPagesCount, setSearchParam, authId])
+
+    // just to delete search parameters
+    useEffect(() => {
+        const params = serializeFormQuery(searchParam)
+        dispatch(setPackAllAC(params))
+
+        /*return () => {
+            dispatch(clearPackSearchFiltersAC())
+        }*/
+    }, [])
+
     return (
-        <div className={s.packsList}>
-            <h1>
-                Packs List
-            </h1>
-            <Box sx={{height: 400, width: '100%'}}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={7}
-                    rowsPerPageOptions={[5]}
-                    checkboxSelection
-                    disableSelectionOnClick
-                    experimentalFeatures={{newEditingApi: true}}
-                />
-            </Box>
+        <div className={`content-wrapper ${s.content}`}>
+            <Grid flexDirection={'row'} justifyContent={'space-between'} className={s.title}>
+                <h2>Packs list</h2>
+                <Button className={s.addBtn}
+                        size={'small'}
+                        variant={'contained'}
+                        onClick={openAddPackModal}
+                >Add new pack
+                </Button>
+            </Grid>
+
+            <div className={`${s.search}`}>
+                <Search searchHandler={searchHandler} searchValue={myOwnSearchParams.packName}/>
+                <PacksOwnerSort owner={myOwnSearchParams.user_id} packsOwnerHandler={packsOwnerHandler}/>
+                <RangeSlider minValue={minCardsCount} maxValue={maxCardsCount}
+                             currentMin={Number(myOwnSearchParams.min)}
+                             currentMax={Number(myOwnSearchParams.max)}
+                             rangeSliderHandler={rangeHandler}/>
+                <ClearFilters clearHandler={clearFiltersHandler}/>
+            </div>
+
+            <UniversalTable
+                columns={columns}
+                rows={cardPacks}
+                pageSize={selectedPagesCount}
+                loading={loading === 'loading'}
+                sortParam={myOwnSearchParams.sortPacks}
+                sortName={'sortPacks'}
+            />
+            <Paginator changePageHandler={paginationHandler} changePagesCountHandler={pagesCountHandler}
+                       currentPage={page} itemsOnPage={pageCount}
+                       itemsTotalCount={cardPacksTotalCount} selectedPagesCount={String(selectedPagesCount)}/>
+            <PackModal
+                data={modalData}
+                isOpen={!!(modalData.openAddPackModal || modalData.openEditPackModal)}
+                onClose={closeModal}/>
+            <DeleteModal
+                data={modalData}
+                isOpen={!!modalData.openDelPackModal}
+                onClose={closeModal}/>
         </div>
     );
 };

@@ -1,0 +1,25 @@
+.container {
+    max-width: 375px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.rangeWrapper {
+    width: 280px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.button{
+    height: 40px;
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        align-items: center;
+        max-width: 335px;
+    }
+}

@@ -10,14 +10,16 @@ import {CheckEmail} from "../../../features/AuthPages/CheckEmail/CheckEmail";
 import {PacksList} from "../../../features/PacksList/PacksList";
 import {PrivateRoutes} from "../PrivateRoutes/PrivateRoutes";
 import {Error404} from "../Error404/Error404";
+import PackPage from "../../../features/PackPage/PackPage";
+import Learn from "../../../features/Learn/Learn";
 
 export const Pages = () => {
     return <Routes>
         <Route element={<PrivateRoutes/>}>
             <Route path={Path.Profile} element={<Profile/>}/>
             <Route path={`${Path.PacksList}`} element={<PacksList/>}/>
-            {/*<Route path={`${Path.PackPage}/:packId`} element={<PackPage/>}/>
-            <Route path={`${Path.LearnPage}/:packId`} element={<Learn/>}/>*/}
+            <Route path={`${Path.PackPage}/:packId`} element={<PackPage/>}/>
+            <Route path={`${Path.LearnPage}/:packId`} element={<Learn/>}/>
         </Route>
         <Route path={Path.Login} element={<Login/>}/>
         <Route path={Path.Registration} element={<Registration/>}/>
