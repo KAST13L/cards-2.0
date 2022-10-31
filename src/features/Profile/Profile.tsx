@@ -9,7 +9,7 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import {logoutTC, updateProfileTC} from "../AuthPages/auth-reducer";
 import ava from '../../assets/images/avatar.jpg'
 import {Navigate} from "react-router-dom";
-import {PATH} from "../../common/enum/Path";
+import {Path} from "../../common/enum/Path";
 import {BackToPacksList} from "../../common/components/BackToPacksList/BackToPacksList";
 
 
@@ -26,7 +26,7 @@ export const Profile = () => {
     }
 
     if (!_id) {
-        return <Navigate to={PATH.LOGIN}/>
+        return <Navigate to={Path.Login}/>
         }
 
     return (

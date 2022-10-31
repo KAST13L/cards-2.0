@@ -5,12 +5,12 @@ import Paper from '@mui/material/Paper';
 import FormControl from '@mui/material/FormControl';
 import {LoginForm} from './LoginForm/LoginForm';
 import {useAppSelector} from "../../../common/hooks/hooks";
-import {PATH} from "../../../common/enum/Path";
+import {Path} from "../../../common/enum/Path";
 
 export const Login = () => {
     const userId = useAppSelector(state => state.auth._id)
     if (userId) {
-        return <Navigate to={PATH.PROFILE}/>
+        return <Navigate to={Path.Profile}/>
     }
 
     return (
@@ -20,7 +20,7 @@ export const Login = () => {
                 <LoginForm/>
             </FormControl>
             <p className={s.text}>Do not have an account ?</p>
-            <NavLink to={PATH.REGISTRATION} className={s.signUpLink}>Sing up</NavLink>
+            <NavLink to={Path.Registration} className={s.signUpLink}>Sing up</NavLink>
         </Paper>
     );
 };

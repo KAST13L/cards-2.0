@@ -10,7 +10,7 @@ import React from 'react';
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {loginTC} from "../../auth-reducer";
 import {PasswordInput} from "../../../../common/components/PasswordInput/PasswordInput";
-import {PATH} from "../../../../common/enum/Path";
+import {Path} from "../../../../common/enum/Path";
 
 type LoginFormType = {
     email: string
@@ -64,7 +64,7 @@ export const LoginForm = () => {
                                   control={<Controller name="rememberMe" control={control}
                                                        render={({field}) => <Checkbox {...field}
                                                                                       checked={!!field.value}/>}/>}/>
-                <NavLink to={PATH.FORGOT_PASSWORD} className={s.forgotPassword}>Forgot password ?</NavLink>
+                <NavLink to={Path.ForgotPassword} className={s.forgotPassword}>Forgot password ?</NavLink>
             </div>
             <Button type={'submit'}
                     variant={'contained'}

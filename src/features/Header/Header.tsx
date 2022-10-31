@@ -3,7 +3,7 @@ import {AppBar, Button, Menu, MenuItem, Toolbar} from "@mui/material";
 import s from "./Header.module.scss"
 import {NavLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {PATH} from "../../common/enum/Path";
+import {Path} from "../../common/enum/Path";
 import {logoutTC} from "../AuthPages/auth-reducer";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
@@ -27,7 +27,7 @@ export const Header = () => {
     }
     const onProfileClickHandler = () => {
         menuCloseHandler()
-        navigate(`${PATH.PROFILE}`)
+        navigate(`${Path.Profile}`)
     }
     const onLogoutClickHandler = () => {
         menuCloseHandler()
@@ -41,7 +41,7 @@ export const Header = () => {
     return (
         <AppBar position={'absolute'} className={s.bar} style={{backgroundColor: '#FCFCFC'}}>
             <Toolbar className={s.toolbar}>
-                <NavLink className={s.logo} to={PATH.PROFILE}/>
+                <NavLink className={s.logo} to={Path.Profile}/>
                 {name
                     ? <div className={s.wrapper}>
                         <span className={s.name} onClick={onMenuClickHandler}>{name}</span>
@@ -55,7 +55,7 @@ export const Header = () => {
                             </MenuItem>
                         </Menu>
                     </div>
-                    : <Button variant={'contained'} onClick={() => navigate(PATH.LOGIN)}>Sign in</Button>}
+                    : <Button variant={'contained'} onClick={() => navigate(Path.Login)}>Sign in</Button>}
             </Toolbar>
             <div style={{height: "5px"}}>
                 {status === "loading" && <LinearProgress/>}

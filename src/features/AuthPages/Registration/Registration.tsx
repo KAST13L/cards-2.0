@@ -4,7 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import Paper from '@mui/material/Paper';
 import s from '../Login/Login.module.scss';
 import RegisterForm from './RegisterForm/RegisterForm';
-import {PATH} from "../../../common/enum/Path";
+import {Path} from "../../../common/enum/Path";
 
 export const Registration = () => {
     return (
@@ -16,7 +16,7 @@ export const Registration = () => {
 
             </FormControl>
             <p className={s.text}>Already have an account ?</p>
-            <NavLink to={PATH.LOGIN} className={s.signUpLink}>Sing in</NavLink>
+            <NavLink to={Path.Login} className={s.signUpLink}>Sing in</NavLink>
         </Paper>
     );
 };

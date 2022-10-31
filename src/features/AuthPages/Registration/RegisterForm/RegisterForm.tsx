@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import {useAppDispatch} from "../../../../common/hooks/hooks";
 import {registerTC} from "../../auth-reducer";
 import {PasswordInput} from "../../../../common/components/PasswordInput/PasswordInput";
-import {PATH} from "../../../../common/enum/Path";
+import {Path} from "../../../../common/enum/Path";
 
 export type RegisterFormType = {
     email: string
@@ -42,7 +42,7 @@ const RegisterForm = () => {
     }
 
     if (redirect) {
-        return <Navigate to={PATH.LOGIN}/>
+        return <Navigate to={Path.Login}/>
     }
 
     return (

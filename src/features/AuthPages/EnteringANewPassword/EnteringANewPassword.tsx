@@ -4,7 +4,7 @@ import s from "./EnteringANewPassword.module.scss";
 import {useAppDispatch} from "../../../common/hooks/hooks";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {setNewPassTC} from "../auth-reducer";
-import { PATH } from "../../../common/enum/Path";
+import { Path } from "../../../common/enum/Path";
 import Paper from "@mui/material/Paper";
 import {PasswordInput} from "../../../common/components/PasswordInput/PasswordInput";
 import Button from "@mui/material/Button";
@@ -34,7 +34,7 @@ export const EnteringANewPassword = () => {
   }
 
   if (isSuccess) {
-    return <Navigate to={PATH.LOGIN}/>
+    return <Navigate to={Path.Login}/>
   }
 
   return (

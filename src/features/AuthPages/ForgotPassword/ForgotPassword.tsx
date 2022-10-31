@@ -5,7 +5,7 @@ import {useAppDispatch} from "../../../common/hooks/hooks";
 import {NavLink, useNavigate} from "react-router-dom";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {forgotPasswordTC} from "../auth-reducer";
-import {PATH} from "../../../common/enum/Path";
+import {Path} from "../../../common/enum/Path";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
@@ -21,7 +21,7 @@ export const ForgotPassword = () => {
     const onSubmit: SubmitHandler<InputsType> = async (data: { email: string }) => {
         let res = await dispatch(forgotPasswordTC(data))
         if (res) {
-            navigate(`${PATH.CHECK_EMAIL}/${data.email}`)
+            navigate(`${Path.CHECK_EMAIL}/${data.email}`)
         }
     }
 
@@ -37,6 +37,6 @@ export const ForgotPassword = () => {
             </Button>
         </form>
         <p>Did you remember your password?</p>
-        <NavLink to={PATH.LOGIN}>Try logging in</NavLink>
+        <NavLink to={Path.Login}>Try logging in</NavLink>
     </Paper>;
 };
