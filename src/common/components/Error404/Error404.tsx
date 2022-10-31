@@ -6,10 +6,10 @@ import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
 import url404 from '../../../assets/images/404.png'
 
-function Error404() {
+export const Error404 = () => {
     const navigate = useNavigate()
     return (
-       <Grid className={`${s.grid}`}>
+       <Grid className={s.container}>
            <Container className={s.text}>
                 <h2>Ooops!</h2>
                 <p>Sorry! Page not found!</p>
@@ -21,5 +21,3 @@ function Error404() {
        </Grid>
     )
 }
-
-export default Error404

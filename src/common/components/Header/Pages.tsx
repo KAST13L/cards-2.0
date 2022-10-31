@@ -1,5 +1,5 @@
 import React from "react";
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {Login} from "../../../features/AuthPages/Login/Login";
 import {ForgotPassword} from "../../../features/AuthPages/ForgotPassword/ForgotPassword";
 import {Profile} from "../../../features/Profile/Profile";
@@ -9,9 +9,9 @@ import {Path} from "../../enum/Path";
 import {CheckEmail} from "../../../features/AuthPages/CheckEmail/CheckEmail";
 import {PacksList} from "../../../features/PacksList/PacksList";
 import {PrivateRoutes} from "../PrivateRoutes/PrivateRoutes";
-import Error404 from "../Error404/Error404";
+import {Error404} from "../Error404/Error404";
 
-export function Pages() {
+export const Pages = () => {
     return <Routes>
         <Route element={<PrivateRoutes/>}>
             <Route path={Path.Profile} element={<Profile/>}/>
