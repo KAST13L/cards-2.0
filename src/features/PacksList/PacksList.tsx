@@ -12,7 +12,7 @@ import {RangeSlider} from '../../common/components/RangeSlider/RangeSlider';
 import {PacksOwnerSort} from '../../common/components/PacksOwnerSort/PacksOwnerSort';
 import {ClearFilters} from '../../common/components/ClearFilters/ClearFilters';
 import {Paginator} from '../../common/components/Paginator/Paginator';
-import s from './PacksList.module.css'
+import s from './PacksList.module.scss'
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import {PackModal} from '../Modals/PackModal';
@@ -132,35 +132,27 @@ export const PacksList = () => {
     const openAddPackModal = () => {
         setModalData({...modalData, title: 'Add new pack', openAddPackModal: true})
     }
-
     const startLearningHandler = (packId: string) => {
         navigate(`${Path.LearnPage}/${packId}`);
     }
 
-
     // Search, filtration, pagination logic
     let selectedPagesCount = myOwnSearchParams.pageCount ?? pageCountDefault
-
     const searchHandler = (value: string) => {
         dispatch(searchPacksByNameAC(value))
     }
-
     const rangeHandler = (min: number, max: number) => {
         dispatch(searchPacksByRangeAC(min, max, minCardsCount, maxCardsCount))
     }
-
     const packsOwnerHandler = (user_id: string) => {
         dispatch(searchPacksByOwnerAC(user_id))
     }
-
     const clearFiltersHandler = () => {
         dispatch(clearPackSearchFiltersAC())
     }
-
     const paginationHandler = (currentPage: number) => {
         dispatch(setPackPageAC(currentPage))
     }
-
     const pagesCountHandler = (newPageCount: string) => {
         dispatch(setPackPageCountAC(+newPageCount))
     }
@@ -185,16 +177,12 @@ export const PacksList = () => {
     useEffect(() => {
         const params = serializeFormQuery(searchParam)
         dispatch(setPackAllAC(params))
-
-        /*return () => {
-            dispatch(clearPackSearchFiltersAC())
-        }*/
     }, [])
 
     return (
-        <div className={`content-wrapper ${s.content}`}>
+        <div className={s.content}>
             <Grid flexDirection={'row'} justifyContent={'space-between'} className={s.title}>
-                <h2>Packs list</h2>
+                <h1>Packs list</h1>
                 <Button className={s.addBtn}
                         size={'small'}
                         variant={'contained'}
@@ -203,7 +191,7 @@ export const PacksList = () => {
                 </Button>
             </Grid>
 
-            <div className={`${s.search}`}>
+            <div className={s.search}>
                 <Search searchHandler={searchHandler} searchValue={myOwnSearchParams.packName}/>
                 <PacksOwnerSort owner={myOwnSearchParams.user_id} packsOwnerHandler={packsOwnerHandler}/>
                 <RangeSlider minValue={minCardsCount} maxValue={maxCardsCount}

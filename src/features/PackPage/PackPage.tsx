@@ -9,7 +9,7 @@ import {useNavigate, useParams, useSearchParams} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
 import {getCardsTC} from './cards_reducer';
 import {Search} from '../../common/components/Search/Search';
-import s from '../PacksList/PacksList.module.css';
+import s from '../PacksList/PacksList.module.scss';
 import {Paginator} from '../../common/components/Paginator/Paginator';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -221,7 +221,7 @@ const PackPage = () => {
         return <Loader/>
 
     return (
-        <div className={`content-wrapper ${s.content} ${c.content}`}>
+        <div style={{marginTop:'140px'}} className={`content-wrapper ${s.content} ${c.content}`}>
             <div className={c.backToPacks}>
                 <BackToPacksList/>
             </div>
