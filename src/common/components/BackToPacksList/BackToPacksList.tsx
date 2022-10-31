@@ -10,7 +10,7 @@ export const BackToPacksList = () => {
 
     const navigate = useNavigate()
     const navigationHandler = () => {
-        navigate(Path.PACKS_LIST)
+        navigate(Path.PacksList)
     }
 
     return (

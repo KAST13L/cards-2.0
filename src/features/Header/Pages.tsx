@@ -17,10 +17,10 @@ export function Pages() {
         <Route path={Path.Login} element={<Login />} />
         <Route path={Path.ForgotPassword} element={<ForgotPassword />} />
         <Route path={Path.Profile} element={<Profile />} />
-        <Route path={Path.PACKS_LIST} element={<PacksList />} />
+        <Route path={Path.PacksList} element={<PacksList />} />
         <Route path={Path.Registration} element={<Registration />} />
-        <Route path={`${Path.NEW_PASSWORD}/:token`} element={<EnteringANewPassword />} />
-        <Route path={`${Path.CHECK_EMAIL}/:email`} element={<CheckEmail />} />
+        <Route path={`${Path.NewPassword}/:token`} element={<EnteringANewPassword />} />
+        <Route path={`${Path.CheckEmail}/:email`} element={<CheckEmail />} />
       </Routes>
     </div>
   );

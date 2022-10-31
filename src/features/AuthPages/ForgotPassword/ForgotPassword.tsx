@@ -21,7 +21,7 @@ export const ForgotPassword = () => {
     const onSubmit: SubmitHandler<InputsType> = async (data: { email: string }) => {
         let res = await dispatch(forgotPasswordTC(data))
         if (res) {
-            navigate(`${Path.CHECK_EMAIL}/${data.email}`)
+            navigate(`${Path.CheckEmail}/${data.email}`)
         }
     }
 
