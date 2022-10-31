@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
-import {Header} from "../features/Header/Header";
-import {Pages} from "../features/Header/Pages";
+import {Header} from "../common/components/Header/Header";
+import {Pages} from "../common/components/Header/Pages";
 import {ErrorSuccessSnackbar} from "../common/components/ErrorSnackbar/ErrorSuccessSnackbar";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {Loader} from "../common/components/Loader/Loader";

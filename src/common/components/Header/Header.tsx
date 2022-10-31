@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import {AppBar, Button, Menu, MenuItem, Toolbar} from "@mui/material";
 import s from "./Header.module.scss"
 import {NavLink, useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {Path} from "../../common/enum/Path";
-import {logoutTC} from "../AuthPages/auth-reducer";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {Path} from "../../enum/Path";
+import {logoutTC} from "../../../features/AuthPages/auth-reducer";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import {LinearProgress} from "@material-ui/core";
-import ava from "./../../assets/images/avatar.jpg"
+import ava from "../../../assets/images/avatar.jpg"
 
 export const Header = () => {
 
@@ -57,7 +57,6 @@ export const Header = () => {
                     </div>
                     : <Button variant={'contained'} onClick={() => navigate(Path.Login)}>Sign in</Button>}
             </Toolbar>
-            // loader
             <div style={{height: "5px"}}>
                 {status === "loading" && <LinearProgress/>}
             </div>
