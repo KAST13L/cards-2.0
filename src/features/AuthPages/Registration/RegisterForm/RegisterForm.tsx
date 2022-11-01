@@ -52,7 +52,7 @@ const RegisterForm = () => {
                 <TextField
                     label="Email"
                     variant="standard"
-                    margin="normal"
+                    margin="none"
                     {...register('email', {
                         required: 'Email is required',
                         pattern: {
@@ -86,7 +86,7 @@ const RegisterForm = () => {
                 <div className={s.authError}>{errors.confirmPassword &&
                     <div>{errors.confirmPassword.message}</div>}</div>
 
-                <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop: '40px'}}
+                <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop: '30px'}}
                         fullWidth>
                     Sign up
                 </Button>
