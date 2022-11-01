@@ -1,15 +1,18 @@
 @mixin authContainer() {
-  width: 400px;
-  margin: 140px auto;
+  width: 310px;
+  margin: 120px auto auto;
   padding: 30px;
   text-align: center;
 }
 @mixin authTitle() {
   text-align: center;
+  font-style: normal;
   font-weight: 600;
-  font-size: 32px;
+  font-size: 26px;
   line-height: 32px;
-  margin: 0 0 30px;
+  color: #000000;
+  margin: 0 0 20px;
+  letter-spacing: 0.01em;
 }
 @mixin authError(){
   color: red;

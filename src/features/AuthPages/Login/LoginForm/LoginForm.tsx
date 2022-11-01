@@ -42,7 +42,7 @@ export const LoginForm = () => {
         <FormGroup>
 
             <TextField label="Email"
-                       margin="normal"
+                       margin="none"
                        variant="standard"
                        {...register('email', {
                            required: 'Email is required',
@@ -59,19 +59,20 @@ export const LoginForm = () => {
                 }
             }} label={'Password'}/>
             <div className={s.authError}>{errors.password && <div>{errors.password.message}</div>}</div>
-            <div style={{display:'flex', justifyContent:'space-between'}}>
-                <FormControlLabel label={'Remember me'} style={{marginTop: '8px'}}
+            <div style={{display: 'flex', justifyContent: 'flex-start'}}>
+                <FormControlLabel label={'Remember me'} style={{marginTop: '15px'}}
                                   control={<Controller name="rememberMe" control={control}
                                                        render={({field}) => <Checkbox {...field}
                                                                                       checked={!!field.value}/>}/>}/>
-                <NavLink to={Path.ForgotPassword} className={s.forgotPassword}>Forgot password ?</NavLink>
             </div>
+            <NavLink to={Path.ForgotPassword} className={s.forgotPassword}>Forgot password ?</NavLink>
             <Button type={'submit'}
                     variant={'contained'}
                     color={'primary'}
-                    style={{marginTop: '30px'}}
                     disabled={requestStatus === 'loading'}
-                    fullWidth>
+                    fullWidth
+                    size="medium"
+            >
                 Sign in
             </Button>
         </FormGroup>

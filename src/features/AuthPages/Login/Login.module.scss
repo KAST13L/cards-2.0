@@ -13,21 +13,42 @@
 
     .wrapper {
       width: inherit;
+      margin-bottom: 20px;
 
-      .authError{
+      .authError {
         @include authError();
       }
+
       .forgotPassword {
+        display: flex;
+        justify-content: flex-end;
         font-weight: 500;
-        margin-top: 20px;
+        font-size: 14px;
+        line-height: 17px;
+        color: #000000;
+        margin-bottom: 20px;
         text-decoration: none;
+
+        &:hover {
+          color: #366EFF;
+        }
+
+        &:active {
+          color: #366EFF;
+          opacity: 0.7;
+        }
+
       }
     }
   }
 
   .text {
-    margin-top: 30px;
-    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000000;
+    opacity: 0.5;
+    margin: 0 0 10px;
   }
 
   .signUpLink {
@@ -35,5 +56,17 @@
     font-size: 16px;
     line-height: 24px;
     color: #366EFF;
+    text-decoration-line: none;
+
+    &:hover {
+      opacity: 0.7;
+      text-decoration-line: underline;
+    }
+
+    &:active {
+      opacity: 0.5;
+      text-decoration-line: underline;
+    }
+
   }
 }
