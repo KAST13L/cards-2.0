@@ -15,8 +15,8 @@ export const Login = () => {
 
     return (
         <Paper className={s.container} elevation={6}>
-            <FormControl className={s.FormControl} >
-                    <h1 className={s.title}>Sign in</h1>
+            <FormControl className={s.FormControl}>
+                <h1 className={s.title}>Sign in</h1>
                 <LoginForm/>
             </FormControl>
             <p className={s.text}>Do not have an account ?</p>
