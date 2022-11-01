@@ -14,8 +14,9 @@ export const BackToPacksList = () => {
     }
 
     return (
-        <Typography className={s.text} onClick={navigationHandler}><KeyboardBackspaceIcon/>
-            <span>Back to Packs List</span>
+        <Typography className={s.content}  onClick={navigationHandler}>
+            <KeyboardBackspaceIcon className={s.arrow}/>
+            <span className={s.text}>Back to Packs List</span>
         </Typography>
     );
 };

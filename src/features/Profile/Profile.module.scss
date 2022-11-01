@@ -9,12 +9,15 @@
   flex-direction: column;
   align-items: center;
   width: 300px;
-  margin: 140px auto;
-  padding: 60px;
+  margin: 120px auto auto;
+  padding: 30px;
 
   .title {
-    margin: 0 0 30px;
     text-align: center;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    margin: 0 0 30px;
   }
 
   .ava {
@@ -36,14 +39,23 @@
       background-color: #808080;
 
       .button {
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
+
+        .photoIcon {
+          width: 25px;
+          height: 30px;
+        }
       }
     }
   }
 
   .email {
-    margin-bottom: 29px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    opacity: 0.5;
+    margin: 0 0 25px;
   }
 
   .logout {
