@@ -1,13 +1,14 @@
 .content {
-    align-items: flex-start;
+    align-items: center;
 }
 
 .ownerBar {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    min-width: 50px;
-    align-items: flex-start;
+    height: 30px;
+}
+
+.title {
+    margin: 0;
 }
 
 .backToPacks {
@@ -17,7 +18,6 @@
 }
 
 .tempWrapper {
-    margin-bottom: 480px;
     min-height: 90px;
     display: flex;
     flex-direction: column;
@@ -27,9 +27,10 @@
 
 .text {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 22px;
     line-height: 20px;
     opacity: 0.5;
+    margin: 15px 0;
 }
 
 .imageQA {

@@ -185,7 +185,7 @@ const PackPage = () => {
     }
 
     const ownerBar = isOwner
-        ? <div className={c.ownerBar}><h2>{packName}</h2>
+        ? <div className={c.ownerBar}><h2 className={c.title}>{packName}</h2>
             <CardsMenu isDisabled={!cardsTotalCount}
                        editPackCallback={openEditPackModal}
                        deletePackCallback={openDeletePackModal}
