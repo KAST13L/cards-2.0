@@ -6,8 +6,7 @@ export enum Path {
     Profile = "/profile",
     CheckEmail = "/check-email",
     PacksList ="/packs",
-    Error404 = '404',
-    Other ='*',
+    Error404 = '*',
     PackPage = '/pack',
     LearnPage = '/learn'
-};
+}
