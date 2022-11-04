@@ -32,12 +32,16 @@ import {
 import deckCoverDefault from '../../assets/images/deckCoverDefault.png'
 import {Path} from "../../common/enum/Path";
 import {getPacksTC} from "./pack-reducer";
+import Box from "@mui/material/Box";
 
 export const PacksList = () => {
+
+    const themeColumn = 'super-app-theme--header'
 
     const columns: GridColDef[] = [
         {
             field: 'deckCover',
+            headerClassName: 'super-app-theme--header',
             headerName: 'Cover',
             sortable: false,
             flex: 1,
@@ -48,22 +52,32 @@ export const PacksList = () => {
         },
         {
             field: 'name',
+            headerClassName: 'super-app-theme--header',
             headerName: 'Name',
             flex: 1,
             renderCell: (params) => (params.row.cardsCount || params.row.user_id === authId ?
                 <Link className={s.link}
                       to={`${Path.PackPage}/${params.id}`}>{params.row.name}</Link> : params.row.name)
         },
-        {field: 'cardsCount', headerName: 'Cards', flex: 1},
+        {
+            field: 'cardsCount', headerClassName: themeColumn,
+            headerName: 'Cards', flex: 1
+        },
         {
             field: 'updated',
+            headerClassName: 'super-app-theme--header',
             headerName: 'Last updated',
             flex: 1,
             renderCell: (params) => (convertDateFromIso8601(params.value))
         },
-        {field: 'user_name', headerName: 'Created by', flex: 1},
+        {
+            field: 'user_name',
+            headerClassName: 'super-app-theme--header',
+            headerName: 'Created by', flex: 1
+        },
         {
             field: 'actions',
+            headerClassName: 'super-app-theme--header',
             headerName: 'Actions',
             sortable: false,
             minWidth: 150,
@@ -200,8 +214,8 @@ export const PacksList = () => {
                              rangeSliderHandler={rangeHandler}/>
                 <ClearFilters clearHandler={clearFiltersHandler}/>
             </div>
-
             <UniversalTable
+                sx={{'& .super-app-theme--header': {backgroundColor: 'rgb(206,206,206)'}}}
                 columns={columns}
                 rows={cardPacks}
                 pageSize={selectedPagesCount}
@@ -209,7 +223,7 @@ export const PacksList = () => {
                 sortParam={myOwnSearchParams.sortPacks}
                 sortName={'sortPacks'}
             />
-            <div style={{paddingTop:'5px'}}></div>
+            <div style={{paddingTop: '5px'}}></div>
             <Paginator changePageHandler={paginationHandler} changePagesCountHandler={pagesCountHandler}
                        currentPage={page} itemsOnPage={pageCount}
                        itemsTotalCount={cardPacksTotalCount} selectedPagesCount={String(selectedPagesCount)}/>

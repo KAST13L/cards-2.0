@@ -39,6 +39,7 @@ const PackPage = () => {
     let columns: GridColDef[] = [
         {
             field: 'question',
+            headerClassName: 'super-app-theme--header',
             headerName: 'Question',
             flex: 1,
             renderCell: (params) => (params.row.questionImg
@@ -49,6 +50,7 @@ const PackPage = () => {
         },
         {
             field: 'answer',
+            headerClassName: 'super-app-theme--header',
             headerName: 'Answer',
             flex: 1,
             renderCell: (params) => (params.row.answerImg
@@ -58,12 +60,14 @@ const PackPage = () => {
         },
         {
             field: 'updated',
+            headerClassName: 'super-app-theme--header',
             headerName: 'Last updated',
             flex: 1,
             renderCell: (params) => (convertDateFromIso8601(params.value))
         },
         {
             field: 'grade',
+            headerClassName: 'super-app-theme--header',
             headerName: 'Grade',
             renderCell: (params) => (
                 <Rating name={params.row.id} defaultValue={params.row.grade} precision={0.1} readOnly/>
@@ -72,6 +76,7 @@ const PackPage = () => {
         },
         {
             field: 'actions',
+            headerClassName: 'super-app-theme--header',
             headerName: 'Actions',
             sortable: false,
             minWidth: 100,
@@ -242,7 +247,9 @@ const PackPage = () => {
                     {packDeckCover && <img className={c.packDeckCover} src={packDeckCover} alt={'deck cover'}/>}
                     <Search isFullWidth={true} searchValue={myOwnSearchParams.cardQuestion}
                             searchHandler={searchHandler}/>
+                    <div style={{padding:'7px'}}></div>
                     <UniversalTable
+                        sx={{'& .super-app-theme--header': {backgroundColor: 'rgb(206,206,206)',},}}
                         columns={renderColumns}
                         rows={cards}
                         pageSize={+selectedPagesCount}

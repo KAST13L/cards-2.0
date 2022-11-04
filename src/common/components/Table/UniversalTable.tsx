@@ -59,7 +59,7 @@ const UniversalTable = ({
     }
 
     return (
-        <div style={{height: 400, width: '100%'}}>
+        <div style={{height: 400, width: '100%', overflowX:'hidden'}}>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -73,6 +73,7 @@ const UniversalTable = ({
                 loading={loading}
                 onSortModelChange={onSortModelChangeHandler}
                 initialState={initialState}
+                scrollbarSize={0}
                 getRowId={(row) => row._id}
                 {...restProps}
             />
