@@ -26,6 +26,7 @@ export const Pages = () => {
         <Route path={Path.ForgotPassword} element={<ForgotPassword/>}/>
         <Route path={`${Path.NewPassword}/:token`} element={<EnteringANewPassword/>}/>
         <Route path={`${Path.CheckEmail}/:email`} element={<CheckEmail/>}/>
-        <Route path={Path.Other} element={<Error404/>}/>
+        <Route path={Path.Error404} element={<Error404/>}/>
+        <Route path={Path.Other} element={<Profile/>}/>
     </Routes>
 }
