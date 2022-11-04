@@ -209,6 +209,7 @@ export const PacksList = () => {
                 sortParam={myOwnSearchParams.sortPacks}
                 sortName={'sortPacks'}
             />
+            <div style={{paddingTop:'5px'}}></div>
             <Paginator changePageHandler={paginationHandler} changePagesCountHandler={pagesCountHandler}
                        currentPage={page} itemsOnPage={pageCount}
                        itemsTotalCount={cardPacksTotalCount} selectedPagesCount={String(selectedPagesCount)}/>
