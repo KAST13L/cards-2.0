@@ -65,7 +65,7 @@ export const LoginForm = () => {
                                                        render={({field}) => <Checkbox {...field}
                                                                                       checked={!!field.value}/>}/>}/>
             </div>
-            <NavLink to={Path.ForgotPassword} className={s.forgotPassword}>Forgot password ?</NavLink>
+            <NavLink to={Path.ForgotPassword} className={s.forgotPassword}> Forgot password ? </NavLink>
             <Button type={'submit'}
                     variant={'contained'}
                     color={'primary'}

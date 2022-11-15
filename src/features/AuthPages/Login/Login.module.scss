@@ -20,13 +20,11 @@
       }
 
       .forgotPassword {
-        display: flex;
-        justify-content: flex-end;
         font-weight: 500;
         font-size: 14px;
         line-height: 17px;
         color: #000000;
-        margin-bottom: 20px;
+        margin: 0  0 15px 190px;
         text-decoration: none;
 
         &:hover {
